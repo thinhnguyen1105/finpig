@@ -3,18 +3,17 @@ import { createStackNavigator, createSwitchNavigator } from 'react-navigation';
 import { Root } from 'native-base';
 import serviceProvider from '../services/service.provider';
 import ScreenNames from '../screens/screen-names';
-import { Test1, Test2, Register } from '../screens';
+import { Login, Register } from '../screens';
 
 class AppNavigator extends React.Component<any, any> {
 
 	Stack: any = createStackNavigator(
 		{
-			[ScreenNames.Test1]: { screen: Test1 },
-			[ScreenNames.Test2]: { screen: Test2 },
+			[ScreenNames.Login]: { screen: Login },
 			[ScreenNames.Register]: { screen: Register },
 		},
 		{
-			initialRouteName: ScreenNames.Register,
+			initialRouteName: ScreenNames.Login,
 			headerMode: 'none'
 		}
 	);

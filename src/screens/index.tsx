@@ -1,7 +1,7 @@
 import Login from './Login';
-import Test2 from './Test2';
+import Register from './Register';
 
 export {
     Login,
-    Test2
+    Register
 };

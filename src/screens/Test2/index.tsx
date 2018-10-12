@@ -15,7 +15,7 @@ class Test2 extends React.Component<any, any> {
         return (
             <View>
                 <Text>asdasd</Text>
-                <Button onPress={() => this.props.navigation.navigate(ScreenNames.Test1)}>
+                <Button onPress={() => this.props.navigation.navigate(ScreenNames.Register)}>
                     <Text>Go to test1</Text>
                 </Button>
             </View>

@@ -11,7 +11,7 @@ const container: ViewStyle = {
 const logoContainer: ViewStyle = {
     alignItems: 'center',
     justifyContent: 'center',
-    paddingBottom: '15%'
+    paddingBottom: '12%'
 }
 
 const text: TextStyle = {

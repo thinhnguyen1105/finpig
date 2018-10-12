@@ -3,7 +3,7 @@ import { createStackNavigator, createSwitchNavigator } from 'react-navigation';
 import { Root } from 'native-base';
 import serviceProvider from '../services/service.provider';
 import ScreenNames from '../screens/screen-names';
-import { Login, Register } from '../screens';
+import { Login, Register, Choose } from '../screens';
 
 class AppNavigator extends React.Component<any, any> {
 
@@ -11,9 +11,10 @@ class AppNavigator extends React.Component<any, any> {
 		{
 			[ScreenNames.Login]: { screen: Login },
 			[ScreenNames.Register]: { screen: Register },
+			[ScreenNames.Choose]: { screen: Choose },
 		},
 		{
-			initialRouteName: ScreenNames.Login,
+			initialRouteName: ScreenNames.Choose,
 			headerMode: 'none'
 		}
 	);

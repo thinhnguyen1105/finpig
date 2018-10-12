@@ -1,0 +1,9 @@
+declare module 'react-native-pie';
+declare module '@rematch/select';
+declare module '@rematch/react-navigation';
+declare module 'redux-persist/lib/storage';
+declare module 'redux-persist/lib/integration/react';
+declare module 'react-native-modal-dropdown';
+declare module 'react-native-material-dropdown';
+declare module 'react-native-svg';
+declare module '*.json';

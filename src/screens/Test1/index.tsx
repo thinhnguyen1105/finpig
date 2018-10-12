@@ -27,7 +27,7 @@ class Test1 extends React.Component<Props, State> {
     render(): React.ReactNode {
         return (
             <View>
-                <Text>Test1</Text>
+                <Text>step 1/6</Text>
                 <Button onPress={() => this.props.navigation.navigate(ScreenNames.Test2)}>
                     <Text>Go to test2</Text>
                 </Button>
@@ -45,7 +45,7 @@ const mapState = (state: AppState) => ({
 });
 
 const mapDispatch = ({ appState }: RematchDispatch<models>) => ({
-    updateNumber: (value: string) => { appState.updateNumber(''); },
+    updateNumber: (value: string) => { appState.updateNumber('' as any); },
 
 });
 

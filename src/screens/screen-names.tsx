@@ -1,7 +1,7 @@
 
 const ScreenNames = {
-   Test1: 'Test1',
-   Test2: 'Test2',
+    Login: 'Login',
+    Test2: 'Test2',
 };
 
 export default ScreenNames;

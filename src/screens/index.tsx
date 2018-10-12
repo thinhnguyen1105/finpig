@@ -1,7 +1,7 @@
-import Test1 from './Test1';
+import Login from './Login';
 import Test2 from './Test2';
 
 export {
-    Test1,
+    Login,
     Test2
 };

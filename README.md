@@ -98,7 +98,7 @@ API:
 
 /budget
 	/{budgetId} GET -> {
-		status: [success, failure],
+		status: [success, failure]
 		auth: [true/false]
 		data: {
 			_id: String
@@ -111,8 +111,10 @@ API:
 
 // get from card to finpig
 /transaction 
-	/user POST {
+	/bank POST {
 		type: [saving, expense]
+		sender: BUDGET_ID
+		receiver: BUDGET_ID
 		amount: {} (USD)
 	} ---> {
 		status: [success, failure],
@@ -126,21 +128,11 @@ API:
 			status: [success, failure, pending]
 		}
 	}
-	/group POST {
-		groupId: GROUP_ID
-		amount: {} (USD)
-	} ---> {
-		status: [success, failure],
-		auth: [true/false]
-		data: {
-			sender: BUDGET_ID
-			receiver: BUDGET_ID
-			date: date
-			amount: {} USD
-			type: [saving, expense]
-			status: [success, failure, pending]
-		}
+	/transfer POST { //user -> group
+		sender: BUDGET_ID
+		receiver: BUDGET_ID
 	}
+
 
 DATABASE:
 User {
@@ -168,6 +160,7 @@ Group {
 	name: String
 	description: String
 	goal: Number
+	managerId: USER_ID
 	startDate: String
 	endDate: String
 	userIds: Array(USER_ID)

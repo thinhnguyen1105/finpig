@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
+const Group = mongoose.model('Group');
 const Budget = mongoose.model('Budget');
 const Transaction = mongoose.model('Transaction');
 const TotalExchange = mongoose.model('TotalExchange');
@@ -9,135 +10,184 @@ const { sendFailure, sendSuccess, verifyJwt } = require('./helper');
 const MAXIMUM_AMOUNT = 1000000;
 const TIME_DELAY_TRANSACTION = 2000;
 
-function postUserTransaction(req, res) {
+async function postBank(req, res) {
     let type = req.body.type;
-    let amount = req.body.amount;
+    let senderId = req.body.sender;
+    let receiverId = req.body.receiver;
+    let amount = parseInt(req.body.amount);
 
-    verifyJwt(req, res, (userId) => {
-        User.findById(userId, (err, user) => {
-            if (err) {
-                return sendFailure(res);
-            }
-
-            Transaction.create({
-                sender: userId,
-                receiver: userId,
-                amount: amount,
-                type: type,
-                status: 'pending'
-            }, (err, transaction) => {
-                if (err) {
-                    return sendFailure(res);
-                }
-
-                beginTransaction(res, transaction, user.budget);
-            });
-        });
-    });
-};
-
-function beginTransaction(res, transaction, budgetId) {
-    doTransaction(transaction, (err) => {
-        transaction.save((err2, updatedTransaction) => {
-            if (err || err2) {
-                return sendFailure(res);
-            }
-
-            //successful transaction
-            Budget.findById(budgetId, (err, budget) => {
-                if (err) {
-                    return sendFailure(res, true, {
-                        info: 'Critical system error! Please contact us for supporting!'
-                    });
-                }
-
-                if (transaction.type === 'saving') {
-                    budget.saving += transaction.amount;
-                } else if (transaction.type === 'expense') {
-                    budget.expense += transaction.amount;
-                }
-                budget.save((err, updatedBudget) => {
-                    if (err) {
-                        return sendFailure(res, true, {
-                            info: 'Critical system error! Please contact us for supporting!'
-                        });
-                    }
-                    return sendSuccess(res, true, updatedTransaction);
-                });
-            });
-        });
-    });
-}
-
-function doTransaction(transaction, cb) {
-    if (transaction.amount <= 0 && transaction.amount > MAXIMUM_AMOUNT) {
-        transaction.status = 'failure';
-        cb(new Error('Sorry, you don\'t have enough money'));
-        return;
-    } else {
-        transaction.status = 'success';
+    let sender, receiver;
+    try {
+        sender = await Budget.findById(senderId);
+        receiver = await Budget.findById(receiverId);
+    } catch (err) {
+        return sendFailure(res);
     }
-    TotalExchange.findOne({
-        sender: transaction.sender,
-        receiver: transaction.receiver
-    }, (err, totalExchange) => {
-        if (err) {
-            cb(err);
-            return;
+
+    verifyJwt(req, res, async function (userId) {
+        let properPermission = await isProperPermission(sender, userId);
+        if (!properPermission) {
+            return sendFailure(res);
         }
-        if (!totalExchange) {
-            TotalExchange.create({
-                sender: transaction.sender,
-                receiver: transaction.receiver,
-                amount: transaction.amount
-            }, (err, totalExchange) => {
-                if (err) {
-                    cb(err);
-                    return;
-                }
-            });
-        } else {
-            totalExchange.amount += transaction.amount;
-            totalExchange.save((err, updatedTotalExchange) => {
-                if (err) {
-                    cb(err);
-                    return;
-                }
-            });
-        }
-    });
-    cb();
-}
 
-function postGroupTransaction(req, res) {
-    let type = 'expense';
-    let amount = req.body.amount;
-    let groupId = req.body.groupId;
-
-    verifyJwt(req, res, (userId) => {
-        Group.findById(groupId, (err, group) => {
-            if (err) {
-                return sendFailure(res);
-            }
-
-            Transaction.create({
-                sender: userId,
-                receiver: groupId,
+        let transaction;
+        try {
+            transaction = await Transaction.create({
+                sender: sender.ownerId,
+                receiver: receiver.ownerId,
                 amount: amount,
                 type: type,
                 status: 'pending'
-            }, (err, transaction) => {
-                if (err) {
-                    return sendFailure(res);
-                }
-
-                beginTransaction(res, transaction, group.budget);
             });
-        });
+        } catch (err) {
+            return sendFailure(res);
+        }
+
+        if (amount < 0 || amount > MAXIMUM_AMOUNT) {
+            return sendFailure(res, true, {
+                info: "Sorry, you don't have enough money"
+            });
+        }
+
+        try {
+            let totalExchange = await TotalExchange.findOne({
+                sender: senderId,
+                receiver: receiverId
+            });
+            if (!totalExchange) {
+                totalExchange = await TotalExchange.create({
+                    sender: senderId,
+                    receiver: receiverId
+                });
+            }
+
+            totalExchange.amount += amount;
+            totalExchange = await totalExchange.save();
+        } catch (err) {
+            return sendFailure(res);
+        }
+
+        try {
+            receiver[type] += amount;
+            receiver = await receiver.save();
+        } catch (err) {
+            return sendFailure(res, true, {
+                info: "Critical error! Please contact us for supporting"
+            });
+        }
+
+        try {
+            transaction.status = 'success';
+            transaction = await transaction.save();
+        } catch (err) {
+            return sendFailure(res);
+        }
+        return sendSuccess(res, true, transaction);
     });
-};
+}
+
+async function isProperPermission(sender, userId) {
+    if (!sender) {
+        return false;
+    }
+
+    if (userId === sender.ownerId.toString()) {
+        return true;
+    }
+
+    if (sender.ownerType === 'group') {
+        try {
+            let group = await Group.findById(sender.ownerId);
+            if (group.managerId.toString() === userId) {
+                return true;
+            }       
+        } catch (err) {
+            return false;
+        }
+    }
+
+    return false;
+}
+
+async function postTransfer(req, res) {
+    let type = 'expense';
+    let senderId = req.body.sender;
+    let receiverId = req.body.receiver;
+    let amount = parseInt(req.body.amount);
+
+    let sender, receiver;
+    try {
+        sender = await Budget.findById(senderId);
+        receiver = await Budget.findById(receiverId);
+    } catch (err) {
+        return sendFailure(res);
+    }
+
+    verifyJwt(req, res, async function (userId) {
+        let properPermission = await isProperPermission(sender, userId);
+        if (!properPermission) {
+            return sendFailure(res);
+        }
+
+        let transaction;
+        try {
+            transaction = await Transaction.create({
+                sender: sender.ownerId,
+                receiver: receiver.ownerId,
+                amount: amount,
+                type: type,
+                status: 'pending'
+            });
+        } catch (err) {
+            return sendFailure(res);
+        }
+
+        if (amount < 0 || amount > MAXIMUM_AMOUNT || sender.expense < amount) {
+            return sendFailure(res, true, {
+                info: "Sorry, you don't have enough money"
+            });
+        }
+
+        try {
+            let totalExchange = await TotalExchange.findOne({
+                sender: senderId,
+                receiver: receiverId
+            });
+            if (!totalExchange) {
+                totalExchange = await TotalExchange.create({
+                    sender: senderId,
+                    receiver: receiverId
+                });
+            }
+
+            totalExchange.amount += amount;
+            totalExchange = await totalExchange.save();
+        } catch (err) {
+            return sendFailure(res);
+        }
+
+        try {
+            sender[type] -= amount;
+            sender = await sender.save();
+            receiver[type] += amount;
+            receiver = await receiver.save();
+        } catch (err) {
+            return sendFailure(res, true, {
+                info: "Critical error! Please contact us for supporting"
+            });
+        }
+
+        try {
+            transaction.status = 'success';
+            transaction = await transaction.save();
+        } catch (err) {
+            return sendFailure(res);
+        }
+        return sendSuccess(res, true, transaction);
+    });
+}
 
 module.exports = {
-    postUserTransaction,
-    postGroupTransaction
+    postBank,
+    postTransfer
 };

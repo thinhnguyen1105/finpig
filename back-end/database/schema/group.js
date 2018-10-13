@@ -15,6 +15,10 @@ const GroupSchema = new Schema ({
         type: Number,
         required: true
     },
+    managerId: {
+        type: Schema.Types.ObjectId,
+        required: true
+    },
     userIds: {
         type: [Schema.Types.ObjectId]
     },

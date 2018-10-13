@@ -66,6 +66,7 @@ API:
 		name: String
 		description: String
 		goal: Number
+		startDate: Date
 		endDate: Date
 		userIds: Array(USER_ID) //exclude sender
 	} --> {
@@ -100,37 +101,44 @@ API:
 		status: [success, failure],
 		auth: [true/false]
 		data: {
-			_id: String,
-			ownerId: String,
-			saving: Number,
+			_id: String
+			ownerType: [user, group]
+			ownerId: String [GROUP_ID, USER_ID]
+			saving: Number
 			expense: Number
 		}
 	}
 
-/owner
-	/{ownerId} GET -> {
-		status: [success, failure],
-		auth: [true/false]
-		data: {
-			_id: String,
-			ownerType: [user, group, finpig]
-			ownerId: String [GROUP_ID, USER_ID,”FinPig”]
-		}
-	}
-
-/transaction POST {
-		token: {}
-
-		tag: [saving, expense]
-		type: [individual, group]
-		receiver_id: {}
+// get from card to finpig
+/transaction 
+	/user POST {
+		type: [saving, expense]
 		amount: {} (USD)
-
 	} ---> {
 		status: [success, failure],
 		auth: [true/false]
 		data: {
-			transaction: TRANSACTION_ID
+			sender: BUDGET_ID
+			receiver: BUDGET_ID
+			date: date
+			amount: {} USD
+			type: [saving, expense]
+			status: [success, failure, pending]
+		}
+	}
+	/group POST {
+		groupId: GROUP_ID
+		amount: {} (USD)
+	} ---> {
+		status: [success, failure],
+		auth: [true/false]
+		data: {
+			sender: BUDGET_ID
+			receiver: BUDGET_ID
+			date: date
+			amount: {} USD
+			type: [saving, expense]
+			status: [success, failure, pending]
 		}
 	}
 
@@ -180,5 +188,14 @@ Transaction { //buy goods, save money
 	receiver: BUDGET_ID
 	date: date
 	amount: {} USD
+	type: [saving, expense]
 	status: [success, failure, pending]
+}
+
+TotalExchange {
+	_id: String
+	sender: BUDGET_ID
+	receiver: BUDGET_ID
+	date: date
+	amount: {} USD
 }

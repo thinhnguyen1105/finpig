@@ -1,4 +1,5 @@
-Except login & register, all queries require TOKEN
+Except login & register, all queries require:
+headers['x-access-token'] = ${TOKEN}
 
 email:
 finpig2018@gmail.com
@@ -7,9 +8,17 @@ hackjunction_finpig@2018
 API:
 /user
 	/{id} GET -> {
-		request_status: [success, failure]
+		requestStatus: {
+			status: [success, failure],
+			auth: [true/false],
+			data: {
+				[info: //detail info of status 'failure']
+				[token: //return from login, register]
+				[userId: //return from login, register]
+			}
+		}
 		info: {
-			id: String
+			_id: String
 			name: String
 			username: String
 
@@ -23,21 +32,37 @@ API:
 	}
 
 	/{id}/group GET -> {
-		request_status: [success, failure]
+		requestStatus: {
+			status: [success, failure],
+			auth: [true/false]
+		}
 		info: {
 			group: Array(GROUP_ID)
 		}
 	}
 
+/auth
 	/login POST username, password -> {
-		request_status: [success, failure]
+		requestStatus: {
+			status: [success, failure],
+			auth: [true/false]
+		}
 		info: {
 			token: String,
 		}
 	}
 
-	/register POST username, password, phone_number, email -> {
-		request_status: [success, failure]
+	/register POST {
+			name,
+			username, 
+			password, 
+			phoneNumber, 
+			email
+		} ---> {
+		requestStatus: {
+			status: [success, failure],
+			auth: [true/false]
+		}
 		info: {
 			status: // Username already exists, Password not secure
 			token: String,
@@ -46,15 +71,15 @@ API:
 
 /group
 	/{id} GET -> {
-	id: String
-	name: String
-	description: String
-	goal: Number
-	user: Array(USER_ID)
-	budget: BUDGET_ID
+		_id: String
+		name: String
+		description: String
+		goal: Number
+		user: Array(USER_ID)
+		budget: BUDGET_ID
 
-	transactions: Array(TRANSACTION_ID) //transaction of group
-}
+		transactions: Array(TRANSACTION_ID) //transaction of group
+	}
 
 /transaction POST {
 		token: {}
@@ -65,7 +90,10 @@ API:
 		amount: {} (USD)
 
 	} ---> {
-		status: [success, failure]
+		requestStatus: {
+			status: [success, failure],
+			auth: [true/false]
+		}
 		info: {
 			transaction: TRANSACTION_ID
 		}
@@ -85,10 +113,11 @@ User {
 	group: Array(GROUP_ID)
 	budget: BUDGET_ID
 
-	banking_card: {
-		type: [VISA]
-		card_id: Number
-		cvc: Number
+	bankingCard: {
+		_id: String
+		cardType: [VISA]
+		cardId: Number
+		securityCode: Number
 	}
 }
 

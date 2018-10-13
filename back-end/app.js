@@ -21,12 +21,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 require('./database/setup')();
-
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+require('./routes')(app);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

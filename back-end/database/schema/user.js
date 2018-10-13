@@ -32,6 +32,9 @@ const UserSchema = new Schema({
         default: 0,
         required: true,
     },
+    budget: {
+        type: Schema.Types.ObjectId
+    },
     groups: {
         type: [Schema.Types.ObjectId]
     },

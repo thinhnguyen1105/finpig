@@ -12,13 +12,23 @@ const GroupSchema = new Schema ({
         trim: true
     },
     goal: {
-        type: Number
+        type: Number,
+        required: true
     },
-    users: {
+    userIds: {
         type: [Schema.Types.ObjectId]
     },
     budget: {
         type: Schema.Types.ObjectId
+    },
+    startDate: {
+        type: Date,
+        default: Date.now,
+        required: true
+    },
+    endDate: {
+        type: Date,
+        required: true
     }
 }, {
     collection: 'Groups'

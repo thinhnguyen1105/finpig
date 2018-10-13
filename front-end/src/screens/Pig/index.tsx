@@ -11,6 +11,7 @@ import { Item, Input, Icon, Button } from 'native-base';
 import BasicLayout from '../../components/BasicLayout';
 import AppText from '../../components/AppText';
 import config from '../../config';
+import ScreenNames from '../screen-names';
 
 export interface Props extends NavigationScreenProps {
     number: number;
@@ -30,7 +31,7 @@ class Pig extends React.Component<Props, State> {
 
     render(): React.ReactNode {
         return (
-            <BasicLayout >
+            <BasicLayout noHeader>
                 <View style={styles.container}>
                     <View style={{ backgroundColor: config().primaryColor, paddingHorizontal: 20, borderRadius: 5, paddingVertical: 20 }}>
                         <AppText style={{ flexWrap: 'wrap', textAlign: 'center', color: '#fff', fontSize: 18 }}>You haven't fed the pig yet. Give it some food!</AppText>
@@ -47,19 +48,19 @@ class Pig extends React.Component<Props, State> {
                             }} />
                     </View>
                     <Image
-                    source={require('../../../assets/images/pig.png')}
-                    style={{width: 110, height: 200, marginBottom: '5%'}}/>
+                        source={require('../../../assets/images/pig.png')}
+                        style={{ width: 110, height: 200, marginBottom: '5%' }} />
                     <View style={{ width: '100%', paddingHorizontal: '5%' }}>
                         <View style={{ marginVertical: '3%', width: '100%' }}>
-
-                            <TouchableOpacity style={{ ...styles.button, backgroundColor: '#bb457b' }}>
+                            <TouchableOpacity style={{ ...styles.button, backgroundColor: '#bb457b' }}
+                                onPress={() => this.props.navigation.navigate(ScreenNames.MainScreen)}>
                                 <Text style={styles.textButton}>ACCEPT</Text>
                             </TouchableOpacity>
 
                         </View>
 
                         <View style={{ marginVertical: '3%', width: '100%' }}>
-                            <TouchableOpacity style={styles.button}>
+                            <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate(ScreenNames.MainScreen)}>
                                 <Text style={styles.textButton}>I'LL DO IT LATER</Text>
                             </TouchableOpacity>
                         </View>

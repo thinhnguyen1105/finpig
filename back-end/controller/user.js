@@ -10,7 +10,6 @@ function getUser(req, res) {
         }
         User.findById(userId, { 
             password: 0,
-            budget: 0,
             bankingCard: 0
         }, (err, user) => {
             if (err) {
@@ -28,7 +27,6 @@ function getGroup(req, res) {
         }
         User.findById(userId, {
             password: 0,
-            budget: 0,
             bankingCard: 0
         }, (err, user) => {
             if (err) {

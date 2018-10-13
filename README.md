@@ -19,6 +19,7 @@ API:
 			avatar: String (url)
 			exp: Number
 			groups: Array(GROUP_ID)
+			budget: BUDGET_ID
 
 			transactions: Array(TRANSACTION_ID) // transaction of user
 		}
@@ -61,14 +62,41 @@ API:
 
 /group
 	/{groupId} GET -> {
-		_id: String
-		name: String
-		description: String
-		goal: Number
-		user: Array(USER_ID)
-		budget: BUDGET_ID
+		status: [success, failure],
+		auth: [true/false]
+		data: {
+			_id: String
+			name: String
+			description: String
+			goal: Number
+			user: Array(USER_ID)
+			budget: BUDGET_ID
 
-		transactions: Array(TRANSACTION_ID) //transaction of group
+			transactions: Array(TRANSACTION_ID) //transaction of group
+		}
+	}
+
+/budget
+	/{budgetId} GET -> {
+		status: [success, failure],
+		auth: [true/false]
+		data: {
+			_id: String,
+			ownerId: String,
+			saving: Number,
+			expense: Number
+		}
+	}
+
+/owner
+	/{ownerId} GET -> {
+		status: [success, failure],
+		auth: [true/false]
+		data: {
+			_id: String,
+			ownerType: [user, group, finpig]
+			ownerId: String [GROUP_ID, USER_ID,”FinPig”]
+		}
 	}
 
 /transaction POST {
@@ -86,7 +114,6 @@ API:
 			transaction: TRANSACTION_ID
 		}
 	}
-
 
 DATABASE:
 User {
@@ -120,15 +147,10 @@ Group {
 
 Budget {
 	_id: String
-	owner: OWNER_ID
+	ownerType: [user, group]
+	ownerId: String [GROUP_ID, USER_ID]
 	saving: Number
 	expense: Number
-}
-
-Owner {
-	_id: String
-	ownerType: [user, group,finpig]
-	ownerId: String [GROUP_ID, USER_ID,”FinPig”]
 }
 
 Transaction { //buy goods, save money

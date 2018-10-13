@@ -21,7 +21,7 @@ class AppNavigator extends React.Component<any, any> {
 			[ScreenNames.GroupDetail]: { screen: GroupDetail },
 		},
 		{
-			initialRouteName: ScreenNames.GroupDetail,
+			initialRouteName: ScreenNames.MainScreen,
 			headerMode: 'none'
 		}
 	);

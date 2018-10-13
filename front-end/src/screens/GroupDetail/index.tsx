@@ -32,10 +32,44 @@ class GroupDetail extends React.Component<Props, State> {
         return (
             <BasicLayout image>
                 <View style={styles.container}>
-                    <View>
+                    <View style={{ width: '100%', justifyContent: 'center', alignItems: 'center' }}>
+                        <AppText style={{ fontFamily: 'iciel-bold', fontSize: 22, color: '#fff' }}>
+                            Japan - Hokaldo
+                        </AppText>
+                        <AppText style={{ color: '#fff', fontSize: 20 }}>
+                            Goal: $100.00
+                        </AppText>
+
                         <Image
                             source={require('../../../assets/my_saving_screen/japan.png')}
-                            style={{width: '100%', height: 140}} />
+                            style={{ width: '100%', height: 160 }}
+                            resizeMode="contain" />
+                        <AppText style={{}}>From 1/1/2017 - 2/2/2018</AppText>
+                    </View>
+                    <View style={{
+                        backgroundColor: '#fff',
+                        paddingHorizontal: 20,
+                        paddingVertical: 10,
+                        width: '100%',
+                        marginTop: 24,
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                    }}>
+                        <AppText style={{ fontSize: 20, fontFamily: 'iciel-bold' }}>Group Detail</AppText>
+                        <AppText>Members</AppText>
+                        <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', borderBottomColor: '#000', borderBottomWidth: 1 }}>
+                            <Image
+                                source={require('../../../assets/my_saving_screen/avatar1.png')}
+                                style={{ flex: 1 }} />
+                            <Image
+                                source={require('../../../assets/my_saving_screen/avatar2.png')}
+                                style={{ flex: 1 }} />
+                            <Image
+                                source={require('../../../assets/my_saving_screen/avatar3.png')}
+                                style={{ flex: 1 }} />
+                        </View>
+                        <AppText style={{ paddingVertical: 20 }}>Lorel iposau asirx</AppText>
+
                     </View>
                 </View>
             </BasicLayout>

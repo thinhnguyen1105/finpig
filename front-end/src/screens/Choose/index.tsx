@@ -1,15 +1,13 @@
 import React from 'react';
-import { Animated, View, Text, Image, TouchableOpacity, ImageBackground } from 'react-native';
+import { Animated, View, Text, Image, TouchableOpacity } from 'react-native';
 import { NavigationScreenProps } from 'react-navigation';
 import { connect } from 'react-redux';
 import { RematchDispatch } from '@rematch/core';
 import { models } from '../../store';
 import { AppState } from '../../store/state';
-import { getLayout } from '../../helpers/get-layout';
 import styles from './styles';
-import { Item, Input, Icon, Button } from 'native-base';
 import BasicLayout from '../../components/BasicLayout';
-import AppText from '../../components/AppText';
+import ScreenNames from '../screen-names';
 
 export interface Props extends NavigationScreenProps {
     number: number;
@@ -35,14 +33,16 @@ class Test1 extends React.Component<Props, State> {
                     <View style={{ width: '100%', paddingHorizontal: '5%' }}>
                         <View style={{ marginVertical: '3%', width: '100%' }}>
 
-                            <TouchableOpacity style={{...styles.button, backgroundColor: '#bb457b'}}>
+                            <TouchableOpacity style={{ ...styles.button, backgroundColor: '#bb457b' }}
+                                onPress={() => this.props.navigation.navigate(ScreenNames.Pig)}>
                                 <Text style={styles.textButton}>BANK ACCOUNT</Text>
                             </TouchableOpacity>
 
                         </View>
 
                         <View style={{ marginVertical: '3%', width: '100%' }}>
-                            <TouchableOpacity style={styles.button}>
+                            <TouchableOpacity style={styles.button}
+                                onPress={() => this.props.navigation.navigate(ScreenNames.Pig)}>
                                 <Text style={styles.textButton}>PHONE ACCOUNT</Text>
                             </TouchableOpacity>
                         </View>

@@ -10,6 +10,7 @@ import styles from './styles';
 import { Item, Input, Icon, Button } from 'native-base';
 import BasicLayout from '../../components/BasicLayout';
 import AppText from '../../components/AppText';
+import ScreenNames from '../screen-names';
 
 export interface Props extends NavigationScreenProps {
     number: number;
@@ -52,17 +53,19 @@ class Test1 extends React.Component<Props, State> {
                         <Input placeholder='Password' style={styles.textInput} secureTextEntry />
                     </Item>
                     <View style={{ marginTop: 20, width: '100%' }}>
-                        <Button full style={{ backgroundColor: '#00caab', borderRadius: 5, }}>
+                        <Button full style={{ backgroundColor: '#00caab', borderRadius: 5, }}
+                            onPress={() => this.props.navigation.navigate(ScreenNames.Choose)}>
                             <AppText>SIGN IN</AppText>
                         </Button>
                     </View>
 
-                    <View style={{ flexDirection: 'row', paddingTop: 10, alignContent: 'center', justifyContent: 'center'  }}>
-                        <TouchableOpacity style={{borderRightWidth: 1, borderRightColor: '#000', paddingHorizontal: 4}}>
+                    <View style={{ flexDirection: 'row', paddingTop: 10, alignContent: 'center', justifyContent: 'center' }}>
+                        <TouchableOpacity style={{ borderRightWidth: 1, borderRightColor: '#000', paddingHorizontal: 4 }}
+                         onPress={() => this.props.navigation.navigate(ScreenNames.Register)}>
                             <AppText style={styles.text}>SIGN UP</AppText>
 
                         </TouchableOpacity>
-                        <TouchableOpacity style={{ paddingHorizontal: 4}}>
+                        <TouchableOpacity style={{ paddingHorizontal: 4 }}>
                             <AppText style={styles.text}>FORGOT PASSWORD?</AppText>
 
                         </TouchableOpacity>

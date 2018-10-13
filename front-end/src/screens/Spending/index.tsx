@@ -67,7 +67,7 @@ class Test1 extends React.Component<Props, State> {
             <View style={{ marginHorizontal: 12, borderTopEndRadius: 5,borderTopStartRadius: 5 }}>
                 <LinearGradient
                     colors={[cardTypeColor[item.type].startColor, cardTypeColor[item.type].endColor]}
-                    style={{ height: getLayout().deviceHeight / 2.5, width: getLayout().deviceWidth / 1.5, borderTopEndRadius: 5,borderTopStartRadius: 5 }}>
+                    style={{ height: getLayout().deviceHeight / 2.7, width: getLayout().deviceWidth / 1.5, borderTopEndRadius: 5,borderTopStartRadius: 5 }}>
                     <View style={{ borderBottomColor: '#fff', borderBottomWidth: 2, justifyContent: 'center', alignItems: 'center' }}>
                         <AppText style={{ paddingVertical: 16, color: '#fff', fontSize: 22, fontFamily: 'iciel-bold' }}>{item.name}</AppText>
 
@@ -175,7 +175,7 @@ class Test1 extends React.Component<Props, State> {
                             data={dataSpedingCard}
                             renderItem={this.renderSpendingCard}
                             keyExtractor={(item, index) => index.toString()}
-                            style={{ paddingHorizontal: '10%' }} />
+                            style={{ paddingHorizontal: '10%', }} />
                     </View>
                 </View>
             </BasicLayout>

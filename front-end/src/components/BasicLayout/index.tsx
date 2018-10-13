@@ -1,4 +1,4 @@
-import { Container, Content, Header, Left } from 'native-base';
+import { Container, Content, Left, Body, Right } from 'native-base';
 import * as React from 'react';
 import styles from './styles';
 import { ViewStyle, StatusBar, View, TouchableOpacity, Image } from 'react-native';
@@ -20,14 +20,24 @@ class BasicLayout extends React.Component<IProps, IState> {
         return (
             <Container style={{ ...containerStyle, backgroundColor: this.props.image ? '#ececec' : '#fff' }}>
                 {!this.props.noHeader &&
-                    <View style={{ flexDirection: 'row' }}>
-                        <TouchableOpacity style={{ paddingLeft: 12 }} onPress={() => (this.props as any).navigation.goBack()}>
-                            <Image
-                                source={require('../../../assets/Register/button_back.png')}
-                                style={{ width: 20, height: 20 }}
-                                resizeMode="contain" />
-                        </TouchableOpacity>
-                        <AppText style={{ fontFamily: 'iciel-bold', alignSelf: 'center' }}>{this.props.title}</AppText>
+                    <View style={{ flexDirection: 'row', width: '100%', justifyContent: 'center', alignItems: 'center' }}>
+                        <Left>
+                            <TouchableOpacity style={{ paddingLeft: 12 }} onPress={() => (this.props as any).navigation.goBack()}>
+                                <Image
+                                    source={require('../../../assets/Register/button_back.png')}
+                                    style={{ width: 20, height: 20 }}
+                                    resizeMode="contain" />
+                            </TouchableOpacity>
+                        </Left>
+
+                        <Body>
+                            <View style={{ alignSelf: 'center', justifyContent: 'center', }}>
+                                <AppText style={{ fontFamily: 'iciel-bold', fontSize: 20, color: '#fff' }} numberOfLines={1} >{this.props.title}</AppText>
+
+                            </View>
+                        </Body>
+                        <Right></Right>
+
                     </View>
                 }
                 {this.props.image &&

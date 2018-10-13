@@ -1,7 +1,7 @@
-import { ViewStyle, TextStyle, ImageStyle } from "react-native";
-import { View } from 'native-base';
+import { ViewStyle, ImageStyle } from "react-native";
 
 const container: ViewStyle = {
+    paddingTop: 15,
     paddingHorizontal: '10%',
     alignItems: 'center',
     // justifyContent: 'center',

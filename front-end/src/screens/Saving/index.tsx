@@ -81,7 +81,7 @@ class Test1 extends React.Component<Props, State> {
             goals: '$100'
         }]
         return (
-            <BasicLayout image>
+            <BasicLayout image title="Saving">
                 <ScrollView>
                     <View style={styles.container}>
                         <View style={{
@@ -109,8 +109,8 @@ class Test1 extends React.Component<Props, State> {
                             <TouchableOpacity style={{ backgroundColor: '#fff', padding: 20, alignItems: 'center', justifyContent: 'center', marginHorizontal: 10 }}>
                                 <Image
                                     source={require('../../../assets/my_saving_screen/wallet.png')}
-                                    style={{ height: 40, width: 40 }} 
-                                    resizeMode="contain"/>
+                                    style={{ height: 40, width: 40 }}
+                                    resizeMode="contain" />
                                 <AppText style={{ fontSize: 12, paddingTop: 10 }}>Add group</AppText>
                             </TouchableOpacity>
                             <TouchableOpacity style={{ backgroundColor: '#fff', padding: 20, alignItems: 'center', justifyContent: 'center', marginHorizontal: 10 }}>

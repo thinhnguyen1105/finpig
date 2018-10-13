@@ -19,4 +19,22 @@ export default class AuthService {
                 console.error(error);
             });
     }
+
+    getUserGroup(token: string, userId: string): Promise<any> {
+        return fetch(`${url}/${userId}/groups`, {
+            method: 'GET',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                'x-access-token': token
+            },
+        })
+            .then((response) => response.json())
+            .then((responseJson) => {
+                return responseJson;
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
 }

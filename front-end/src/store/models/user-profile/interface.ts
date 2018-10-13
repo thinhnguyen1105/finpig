@@ -1,4 +1,9 @@
 export interface UserState {
+   info: UserInfo,
+   token: string;
+}
+
+export interface UserInfo {
     avatar: string;
     exp: number;
     groups: string[],

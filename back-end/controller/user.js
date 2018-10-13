@@ -11,7 +11,7 @@ function getUser(req, res) {
         User.findById(userId, { 
             password: 0,
             budget: 0,
-            banking_card: 0
+            bankingCard: 0
         }, (err, user) => {
             if (err) {
                 return sendFailure(res);
@@ -21,6 +21,27 @@ function getUser(req, res) {
     });
 }
 
+function getGroup(req, res) {
+    verifyJwt(req, res, (userId) => {
+        if (req.params.userId !== userId) {
+            return sendFailure(res, false);
+        }
+        User.findById(userId, {
+            password: 0,
+            budget: 0,
+            bankingCard: 0
+        }, (err, user) => {
+            if (err) {
+                return sendFailure(res);
+            }
+            return sendSuccess(res, true, {
+                groups: user.groups
+            });
+        });
+    });
+}
+
 module.exports = {
-    getUser
+    getUser,
+    getGroup
 };

@@ -24,13 +24,11 @@ API:
 		}
 	}
 
-	/{id}/group GET -> {
-		requestStatus: {
-			status: [success, failure],
-			auth: [true/false]
-		}
-		info: {
-			group: Array(GROUP_ID)
+	/{userId}/groups GET -> {
+		status: [success, failure],
+		auth: [true/false]
+		data: {
+			groups: Array(GROUP_ID)
 		}
 	}
 
@@ -45,24 +43,24 @@ API:
 	}
 
 	/register POST {
-			name,
-			username, 
-			password, 
-			phoneNumber, 
-			email
-		} ---> {
+		name,
+		username, 
+		password, 
+		phoneNumber, 
+		email
+	} ---> {
 
-			status: [success, failure],
-			auth: [true/false]
-			data: {
-				info: //detail info of status 'failure'
-				token: TOKEN
-				userId: USER_ID
-			}
+		status: [success, failure],
+		auth: [true/false]
+		data: {
+			info: //detail info of status 'failure'
+			token: TOKEN
+			userId: USER_ID
 		}
+	}
 
 /group
-	/{id} GET -> {
+	/{groupId} GET -> {
 		_id: String
 		name: String
 		description: String

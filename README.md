@@ -190,7 +190,8 @@ User {
 
 BankingCard: {
 	_id: String
-	cardType: ['visa']
+	fullName: String
+	cardType: String
 	cardId: String
 	securityCode: String
 }

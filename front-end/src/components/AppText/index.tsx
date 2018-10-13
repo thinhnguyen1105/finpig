@@ -5,7 +5,7 @@ export interface IProps {
     style?: TextStyle
 }
 export interface IState { }
-class BasicLayout extends React.Component<IProps, IState> {
+class AppText extends React.Component<IProps, IState> {
     render(): React.ReactNode {
         return (
             <Text style={{ fontFamily: 'iciel-regular', ...this.props.style }}>{this.props.children}</Text>
@@ -13,4 +13,4 @@ class BasicLayout extends React.Component<IProps, IState> {
     }
 }
 
-export default BasicLayout;
+export default AppText;

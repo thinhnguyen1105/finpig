@@ -1,5 +1,5 @@
 import React from 'react';
-import { Animated, View, Text, Image, TouchableOpacity, ImageBackground, ToolbarAndroidComponent } from 'react-native';
+import { Animated, View, Text, Image, TouchableOpacity } from 'react-native';
 import { NavigationScreenProps } from 'react-navigation';
 import { connect } from 'react-redux';
 import { RematchDispatch } from '@rematch/core';
@@ -9,6 +9,7 @@ import { getLayout } from '../../helpers/get-layout';
 import styles from './styles';
 import AppText from '../../components/AppText';
 import ScreenNames from '../screen-names';
+import BasicLayout from '../../components/BasicLayout';
 
 export interface Props extends NavigationScreenProps {
     number: number;
@@ -28,10 +29,7 @@ class Test1 extends React.Component<Props, State> {
 
     render(): React.ReactNode {
         return (
-            <View style={{ flex: 1 }} >
-                <Image
-                    source={require('../../../assets/main_screen/background_pink.png')}
-                    style={{ width: getLayout().deviceWidth, height: getLayout().deviceHeight / 2, position: 'absolute' }} />
+            <BasicLayout image noHeader>
                 <View style={styles.container}>
                     <View style={{ alignItems: 'center', marginBottom: 12 }}>
                         <View></View>
@@ -54,7 +52,8 @@ class Test1 extends React.Component<Props, State> {
 
                                 <AppText>Spending</AppText>
                             </TouchableOpacity>
-                            <TouchableOpacity style={{ paddingVertical: 10, justifyContent: 'center', alignItems: 'center' }}>
+                            <TouchableOpacity style={{ paddingVertical: 10, justifyContent: 'center', alignItems: 'center' }}
+                                onPress={() => this.props.navigation.navigate(ScreenNames.Saving)}>
                                 <View style={styles.button}>
                                     <Image
                                         source={require('../../../assets/main_screen/button_main2.png')}
@@ -102,9 +101,7 @@ class Test1 extends React.Component<Props, State> {
 
                     <Text style={{ bottom: -100 }}>Level: 20</Text>
                 </View>
-
-
-            </View >
+            </BasicLayout >
         );
     }
 }

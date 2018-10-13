@@ -51,13 +51,13 @@ class Test1 extends React.Component<Props, State> {
                                 resizeMode="contain" />
                             <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
                                 <TouchableOpacity
-                                    style={{ height: 20, width: 20, borderRadius: 20 / 2, backgroundColor: 'red', justifyContent: 'center', alignItems: 'center' }}
+                                    style={{ height: 20, width: 20, borderRadius: 20 / 2, backgroundColor: '#f93a5e', justifyContent: 'center', alignItems: 'center' }}
                                     onPress={() => this.setState({ pig1: this.state.pig1 === 0 ? 0 : this.state.pig1 - 5 })}>
                                     <Icon name="remove" style={{ fontSize: 20, color: '#fff' }} />
                                 </TouchableOpacity>
                                 <AppText style={{ paddingHorizontal: 12, fontSize: 20 }}>{this.state.pig1}</AppText>
                                 <TouchableOpacity
-                                    style={{ height: 20, width: 20, borderRadius: 20 / 2, backgroundColor: 'blue', justifyContent: 'center', alignItems: 'center' }}
+                                    style={{ height: 20, width: 20, borderRadius: 20 / 2, backgroundColor: '#3a8bf9', justifyContent: 'center', alignItems: 'center' }}
                                     onPress={() => this.setState({ pig1: this.state.pig1 + 5 })}>
                                     <Icon name="add" style={{ fontSize: 20, color: '#fff' }} />
                                 </TouchableOpacity>
@@ -70,13 +70,13 @@ class Test1 extends React.Component<Props, State> {
                                 resizeMode="contain" />
                             <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
                                 <TouchableOpacity
-                                    style={{ height: 20, width: 20, borderRadius: 20 / 2, backgroundColor: 'red', justifyContent: 'center', alignItems: 'center' }}
+                                    style={{ height: 20, width: 20, borderRadius: 20 / 2, backgroundColor: '#f93a5e', justifyContent: 'center', alignItems: 'center' }}
                                     onPress={() => this.setState({ pig2: this.state.pig2 === 0 ? 0 : this.state.pig2 - 5 })}>
                                     <Icon name="remove" style={{ fontSize: 20, color: '#fff' }} />
                                 </TouchableOpacity>
                                 <AppText style={{ paddingHorizontal: 12, fontSize: 20 }}>{this.state.pig2}</AppText>
                                 <TouchableOpacity
-                                    style={{ height: 20, width: 20, borderRadius: 20 / 2, backgroundColor: 'blue', justifyContent: 'center', alignItems: 'center' }}
+                                    style={{ height: 20, width: 20, borderRadius: 20 / 2, backgroundColor: '#3a8bf9', justifyContent: 'center', alignItems: 'center' }}
                                     onPress={() => this.setState({ pig2: this.state.pig2 + 5 })}>
                                     <Icon name="add" style={{ fontSize: 20, color: '#fff' }} />
                                 </TouchableOpacity>
@@ -89,13 +89,13 @@ class Test1 extends React.Component<Props, State> {
                                 resizeMode="contain" />
                             <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
                                 <TouchableOpacity
-                                    style={{ height: 20, width: 20, borderRadius: 20 / 2, backgroundColor: 'red', justifyContent: 'center', alignItems: 'center' }}
+                                    style={{ height: 20, width: 20, borderRadius: 20 / 2, backgroundColor: '#f93a5e', justifyContent: 'center', alignItems: 'center' }}
                                     onPress={() => this.setState({ pig3: this.state.pig3 === 0 ? 0 : this.state.pig3 - 5 })}>
                                     <Icon name="remove" style={{ fontSize: 20, color: '#fff' }} />
                                 </TouchableOpacity>
                                 <AppText style={{ paddingHorizontal: 12, fontSize: 20 }}>{this.state.pig3}</AppText>
                                 <TouchableOpacity
-                                    style={{ height: 20, width: 20, borderRadius: 20 / 2, backgroundColor: 'blue', justifyContent: 'center', alignItems: 'center' }}
+                                    style={{ height: 20, width: 20, borderRadius: 20 / 2, backgroundColor: '#3a8bf9', justifyContent: 'center', alignItems: 'center' }}
                                     onPress={() => this.setState({ pig3: this.state.pig3 + 5 })}>
                                     <Icon name="add" style={{ fontSize: 20, color: '#fff' }} />
                                 </TouchableOpacity>
@@ -108,13 +108,13 @@ class Test1 extends React.Component<Props, State> {
                                 resizeMode="contain" />
                             <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
                                 <TouchableOpacity
-                                    style={{ height: 20, width: 20, borderRadius: 20 / 2, backgroundColor: 'red', justifyContent: 'center', alignItems: 'center' }}
+                                    style={{ height: 20, width: 20, borderRadius: 20 / 2, backgroundColor: '#f93a5e', justifyContent: 'center', alignItems: 'center' }}
                                     onPress={() => this.setState({ pig4: this.state.pig4 === 0 ? 0 : this.state.pig4 - 5 })}>
                                     <Icon name="remove" style={{ fontSize: 20, color: '#fff' }} />
                                 </TouchableOpacity>
                                 <AppText style={{ paddingHorizontal: 12, fontSize: 20 }}>{this.state.pig4}</AppText>
                                 <TouchableOpacity
-                                    style={{ height: 20, width: 20, borderRadius: 20 / 2, backgroundColor: 'blue', justifyContent: 'center', alignItems: 'center' }}
+                                    style={{ height: 20, width: 20, borderRadius: 20 / 2, backgroundColor: '#3a8bf9', justifyContent: 'center', alignItems: 'center' }}
                                     onPress={() => this.setState({ pig4: this.state.pig4 + 5 })}>
                                     <Icon name="add" style={{ fontSize: 20, color: '#fff' }} />
                                 </TouchableOpacity>
@@ -140,8 +140,6 @@ const mapState = (state: AppState) => ({
 });
 
 const mapDispatch = ({ appState }: RematchDispatch<models>) => ({
-    updateNumber: (value: string) => { appState.updateNumber(''); },
-
 });
 
 export default connect(mapState, mapDispatch as any)(Test1);

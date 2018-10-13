@@ -20,11 +20,13 @@ function verifyJwt(req, res, cb) {
 	let token = req.headers['x-access-token'];
 	if (!token) {
 		sendFailure(res, false);
+		return;
 	}
 
 	jwt.verify(token, process.env.SECRET, (err, decoded) => {
 		if (err) {
 			sendFailure(res, false);
+			return;
 		}
 
 		cb(decoded.id);

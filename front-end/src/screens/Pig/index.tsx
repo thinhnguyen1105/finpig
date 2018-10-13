@@ -1,13 +1,11 @@
 import React from 'react';
-import { Animated, View, Text, Image, TouchableOpacity, ImageBackground, TextInput } from 'react-native';
+import { Animated, View, Text, Image, TouchableOpacity, TextInput } from 'react-native';
 import { NavigationScreenProps } from 'react-navigation';
 import { connect } from 'react-redux';
 import { RematchDispatch } from '@rematch/core';
 import { models } from '../../store';
 import { AppState } from '../../store/state';
-import { getLayout } from '../../helpers/get-layout';
 import styles from './styles';
-import { Item, Input, Icon, Button } from 'native-base';
 import BasicLayout from '../../components/BasicLayout';
 import AppText from '../../components/AppText';
 import config from '../../config';
@@ -76,8 +74,6 @@ const mapState = (state: AppState) => ({
 });
 
 const mapDispatch = ({ appState }: RematchDispatch<models>) => ({
-    updateNumber: (value: string) => { appState.updateNumber(''); },
-
 });
 
 export default connect(mapState, mapDispatch as any)(Pig);

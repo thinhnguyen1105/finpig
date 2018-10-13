@@ -58,6 +58,8 @@ async function putUser(req, res) {
                 user.email = req.body.email;
             }
             user = await user.save();
+            user.password = null;
+            user.securityCode = null;
             return sendSuccess(res, true, user);
         } catch (err) {
             return sendFailure(res);

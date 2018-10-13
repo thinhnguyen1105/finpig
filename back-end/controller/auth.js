@@ -56,12 +56,13 @@ async function register(req, res) {
 				ownerType: 'user',
 				ownerId: user._id,
 				saving: 0,
-				expense: 0
+				expense: 0,
+				balance: 0
 			});
 			let bankingCard = await BankingCard.create({
 				cardType: 'visa',
-				cardId: '',
-				securityCode: ''
+				cardId: 'cardId',
+				securityCode: 'securityCode'
 			});
 			user.budget = budget._id;
 			user.bankingCard = bankingCard._id;
@@ -73,7 +74,9 @@ async function register(req, res) {
 				userId: user._id
 			});
 		} catch (err) {
-			return sendFailure(res, false);
+			if (err) {
+				return sendFailure(res, false);
+			}
 		}
 	});
 }

@@ -9,7 +9,7 @@ import { getLayout } from '../../../helpers/get-layout';
 import styles from './styles';
 import { Item, Input, Icon, Button, CheckBox } from 'native-base';
 import BasicLayout from '../../../components/BasicLayout';
-import AppText from '../../components/AppText';
+import AppText from '../../../components/AppText';
 import config from '../../../config';
 import ScreenNames from '../../screen-names';
 
@@ -18,14 +18,20 @@ export interface Props extends NavigationScreenProps {
     updateNumber: () => void;
 }
 export interface State {
-
+    pig1: number;
+    pig2: number;
+    pig3: number;
+    pig4: number;
 }
 
 class Test1 extends React.Component<Props, State> {
     constructor(props: any) {
         super(props);
         this.state = {
-            opacity: new Animated.Value(1),
+            pig1: 0,
+            pig2: 0,
+            pig3: 0,
+            pig4: 0,
         };
     }
 
@@ -43,35 +49,85 @@ class Test1 extends React.Component<Props, State> {
                                 source={require('../../../../assets/images/pig1.png')}
                                 style={styles.image}
                                 resizeMode="contain" />
-                            <CheckBox checked={true} style={styles.checkbox} />
+                            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+                                <TouchableOpacity
+                                    style={{ height: 20, width: 20, borderRadius: 20 / 2, backgroundColor: 'red', justifyContent: 'center', alignItems: 'center' }}
+                                    onPress={() => this.setState({ pig1: this.state.pig1 === 0 ? 0 : this.state.pig1 - 5 })}>
+                                    <Icon name="remove" style={{ fontSize: 20, color: '#fff' }} />
+                                </TouchableOpacity>
+                                <AppText style={{ paddingHorizontal: 12, fontSize: 20 }}>{this.state.pig1}</AppText>
+                                <TouchableOpacity
+                                    style={{ height: 20, width: 20, borderRadius: 20 / 2, backgroundColor: 'blue', justifyContent: 'center', alignItems: 'center' }}
+                                    onPress={() => this.setState({ pig1: this.state.pig1 + 5 })}>
+                                    <Icon name="add" style={{ fontSize: 20, color: '#fff' }} />
+                                </TouchableOpacity>
+                            </View>
                         </View>
                         <View style={styles.imageContainer}>
                             <Image
                                 source={require('../../../../assets/images/pig2.png')}
                                 style={styles.image}
                                 resizeMode="contain" />
-                            <CheckBox checked={true} style={styles.checkbox} />
-
+                            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+                                <TouchableOpacity
+                                    style={{ height: 20, width: 20, borderRadius: 20 / 2, backgroundColor: 'red', justifyContent: 'center', alignItems: 'center' }}
+                                    onPress={() => this.setState({ pig2: this.state.pig2 === 0 ? 0 : this.state.pig2 - 5 })}>
+                                    <Icon name="remove" style={{ fontSize: 20, color: '#fff' }} />
+                                </TouchableOpacity>
+                                <AppText style={{ paddingHorizontal: 12, fontSize: 20 }}>{this.state.pig2}</AppText>
+                                <TouchableOpacity
+                                    style={{ height: 20, width: 20, borderRadius: 20 / 2, backgroundColor: 'blue', justifyContent: 'center', alignItems: 'center' }}
+                                    onPress={() => this.setState({ pig2: this.state.pig2 + 5 })}>
+                                    <Icon name="add" style={{ fontSize: 20, color: '#fff' }} />
+                                </TouchableOpacity>
+                            </View>
                         </View>
                         <View style={styles.imageContainer}>
                             <Image
                                 source={require('../../../../assets/images/pig3.png')}
                                 style={styles.image}
                                 resizeMode="contain" />
-                            <CheckBox checked={true} style={styles.checkbox} />
-
+                            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+                                <TouchableOpacity
+                                    style={{ height: 20, width: 20, borderRadius: 20 / 2, backgroundColor: 'red', justifyContent: 'center', alignItems: 'center' }}
+                                    onPress={() => this.setState({ pig3: this.state.pig3 === 0 ? 0 : this.state.pig3 - 5 })}>
+                                    <Icon name="remove" style={{ fontSize: 20, color: '#fff' }} />
+                                </TouchableOpacity>
+                                <AppText style={{ paddingHorizontal: 12, fontSize: 20 }}>{this.state.pig3}</AppText>
+                                <TouchableOpacity
+                                    style={{ height: 20, width: 20, borderRadius: 20 / 2, backgroundColor: 'blue', justifyContent: 'center', alignItems: 'center' }}
+                                    onPress={() => this.setState({ pig3: this.state.pig3 + 5 })}>
+                                    <Icon name="add" style={{ fontSize: 20, color: '#fff' }} />
+                                </TouchableOpacity>
+                            </View>
                         </View>
                         <View style={styles.imageContainer}>
                             <Image
                                 source={require('../../../../assets/images/pig4.png')}
                                 style={styles.image}
                                 resizeMode="contain" />
-                            <CheckBox checked={true} style={styles.checkbox} />
-
+                            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+                                <TouchableOpacity
+                                    style={{ height: 20, width: 20, borderRadius: 20 / 2, backgroundColor: 'red', justifyContent: 'center', alignItems: 'center' }}
+                                    onPress={() => this.setState({ pig4: this.state.pig4 === 0 ? 0 : this.state.pig4 - 5 })}>
+                                    <Icon name="remove" style={{ fontSize: 20, color: '#fff' }} />
+                                </TouchableOpacity>
+                                <AppText style={{ paddingHorizontal: 12, fontSize: 20 }}>{this.state.pig4}</AppText>
+                                <TouchableOpacity
+                                    style={{ height: 20, width: 20, borderRadius: 20 / 2, backgroundColor: 'blue', justifyContent: 'center', alignItems: 'center' }}
+                                    onPress={() => this.setState({ pig4: this.state.pig4 + 5 })}>
+                                    <Icon name="add" style={{ fontSize: 20, color: '#fff' }} />
+                                </TouchableOpacity>
+                            </View>
                         </View>
                     </View>
                     <TouchableOpacity style={styles.button}
-                        onPress={() => this.props.navigation.navigate(ScreenNames.Pig)}>
+                        onPress={() => this.props.navigation.navigate(ScreenNames.Race, {choosenPig: {
+                            pig1: this.state.pig1,
+                            pig2: this.state.pig2,
+                            pig3: this.state.pig3,
+                            pig4: this.state.pig4,
+                        }})}>
                         <Text style={styles.textButton}>START RACE</Text>
                     </TouchableOpacity>
                 </View>

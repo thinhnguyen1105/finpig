@@ -41,6 +41,8 @@ function postGroup(req, res) {
         }
         data.userIds.push(userId);
 
+        data.managerId = userId;
+
         Group.create(data, (err, group) => {
             if (err) {
                 return sendFailure(res);

@@ -17,6 +17,7 @@ const TotalExchangeSchema = new Schema({
     },
     amount: {
         type: Number,
+        default: 0,
         required: true
     },
     status: {

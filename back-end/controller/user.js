@@ -54,6 +54,9 @@ await function putUser(req, res) {
             if (req.body.age) {
                 user.age = req.body.age;
             }
+            if (req.body.email) {
+                user.email = req.body.email;
+            }
             user = await user.save();
             return sendSuccess(res, true, user);
         } catch (err) {

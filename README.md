@@ -5,6 +5,10 @@ email:
 finpig2018@gmail.com
 hackjunction_finpig@2018
 
+balance: bank to balance
+expense: balance to expense
+saving: balance to saving
+
 API:
 /user
 	/{userId} GET -> {
@@ -18,6 +22,7 @@ API:
 			age: Number
 			avatar: String (url)
 			exp: Number
+			email: String
 			groups: Array(GROUP_ID)
 			budget: BUDGET_ID
 
@@ -38,6 +43,7 @@ API:
 				age: Number
 				avatar: String (url)
 				exp: Number
+				email: String
 				groups: Array(GROUP_ID)
 				budget: BUDGET_ID
 
@@ -125,6 +131,7 @@ API:
 			ownerType: [user, group]
 			ownerId: String [GROUP_ID, USER_ID]
 			saving: Number
+			balance: Number
 			expense: Number
 		}
 	}
@@ -132,28 +139,28 @@ API:
 // get from card to finpig
 /transaction 
 	/bank POST {
-		type: [saving, expense]
 		sender: BUDGET_ID
 		receiver: BUDGET_ID
 		amount: {} (USD)
 	} ---> {
-		status: [success, failure],
+		status: [success, failure]
 		auth: [true/false]
 		data: {
 			sender: BUDGET_ID
 			receiver: BUDGET_ID
 			date: date
 			amount: {} USD
-			type: [saving, expense]
+			type: [saving, expense, balance]
 			status: [success, failure, pending]
 		}
 	}
-	/transfer POST { //user -> group
+	/transfer POST { //user -> saving, expense
 		sender: BUDGET_ID
 		receiver: BUDGET_ID
+		receiverType: ['saving', 'expense']
 		amount: {} (USD)
 	} ---> {
-		status: [success, failure],
+		status: [success, failure]
 		auth: [true/false]
 		data: {
 			sender: BUDGET_ID
@@ -205,6 +212,7 @@ Budget {
 	ownerType: [user, group]
 	ownerId: String [GROUP_ID, USER_ID]
 	saving: Number
+	balance: Number
 	expense: Number
 }
 
@@ -214,7 +222,7 @@ Transaction { //buy goods, save money
 	receiver: BUDGET_ID
 	date: date
 	amount: {} USD
-	type: [saving, expense]
+	type: [saving, expense, balance]
 	status: [success, failure, pending]
 }
 

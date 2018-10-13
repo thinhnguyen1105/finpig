@@ -1,9 +1,11 @@
-var express = require('express');
-var router = express.Router();
+const { join } = require('path');
+const BASE_URL = '/api/v1/';
+const userRoute = require('./user');
+const authRoute = require('./auth');
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+function setup(app) {
+  app.use(BASE_URL + 'user', userRoute);
+  app.use(BASE_URL + 'auth', authRoute);
+}
 
-module.exports = router;
+module.exports = setup;

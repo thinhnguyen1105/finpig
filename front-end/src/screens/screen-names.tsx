@@ -5,7 +5,8 @@ const ScreenNames = {
    Choose: 'Choose',
    ChoosePig: 'ChoosePig',
    Pig: 'Pig',
-   MainScreen: 'MainScreen'
+   MainScreen: 'MainScreen',
+   Race: 'Race'
 };
 
 export default ScreenNames;

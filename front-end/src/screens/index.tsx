@@ -4,6 +4,7 @@ import Choose from './Choose';
 import Pig from './Pig';
 import ChoosePig from './Game/ChoosePig';
 import MainScreen from './MainScreen';
+import Race from './Game/Race';
 
 export {
     Choose,
@@ -11,5 +12,6 @@ export {
     Register,
     ChoosePig,
     Pig,
-    MainScreen
+    MainScreen,
+    Race
 };

@@ -122,7 +122,12 @@ class Test1 extends React.Component<Props, State> {
                         </View>
                     </View>
                     <TouchableOpacity style={styles.button}
-                        onPress={() => this.props.navigation.navigate(ScreenNames.Pig)}>
+                        onPress={() => this.props.navigation.navigate(ScreenNames.Race, {choosenPig: {
+                            pig1: this.state.pig1,
+                            pig2: this.state.pig2,
+                            pig3: this.state.pig3,
+                            pig4: this.state.pig4,
+                        }})}>
                         <Text style={styles.textButton}>START RACE</Text>
                     </TouchableOpacity>
                 </View>

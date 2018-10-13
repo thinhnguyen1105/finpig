@@ -4,12 +4,14 @@ import styles from './styles';
 import { ViewStyle, StatusBar, View, TouchableOpacity, Image } from 'react-native';
 import { withNavigation, NavigationScreenProps } from 'react-navigation';
 import { getLayout } from '../../helpers/get-layout';
+import AppText from '../AppText';
 
 export interface IProps {
     styles?: ViewStyle;
     isFullscreen?: boolean;
     image?: boolean;
     noHeader?: boolean;
+    title?: string;
 }
 export interface IState { }
 class BasicLayout extends React.Component<IProps, IState> {
@@ -18,13 +20,16 @@ class BasicLayout extends React.Component<IProps, IState> {
         return (
             <Container style={{ ...containerStyle, backgroundColor: this.props.image ? '#ececec' : '#fff' }}>
                 {!this.props.noHeader &&
-
-                    <TouchableOpacity style={{ paddingLeft: 12 }} onPress={() => (this.props as any).navigation.goBack()}>
-                        <Image
-                            source={require('../../../assets/Register/button_back.png')}
-                            style={{ width: 20, height: 20 }}
-                            resizeMode="contain" />
-                    </TouchableOpacity>}
+                    <View style={{ flexDirection: 'row' }}>
+                        <TouchableOpacity style={{ paddingLeft: 12 }} onPress={() => (this.props as any).navigation.goBack()}>
+                            <Image
+                                source={require('../../../assets/Register/button_back.png')}
+                                style={{ width: 20, height: 20 }}
+                                resizeMode="contain" />
+                        </TouchableOpacity>
+                        <AppText style={{ fontFamily: 'iciel-bold', alignSelf: 'center' }}>{this.props.title}</AppText>
+                    </View>
+                }
                 {this.props.image &&
                     <Image
                         source={require('../../../assets/main_screen/background_pink.png')}

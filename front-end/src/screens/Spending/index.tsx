@@ -160,7 +160,7 @@ class Test1 extends React.Component<Props, State> {
         }]
 
         return (
-            <BasicLayout image>
+            <BasicLayout image title="Spending Card">
                 <View style={styles.container}>
                     <FlatList
                         data={dataCard}

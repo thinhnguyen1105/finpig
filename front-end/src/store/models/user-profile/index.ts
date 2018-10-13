@@ -34,7 +34,7 @@ export default createModel({
         async loginAsync(payload: LoginParam, _rootState: AppState): Promise<any> {
             try {
                 const login = await serviceProvider.AuthService().login({ username: payload.username, password: payload.password });
-                this.getUserAsync({ token: login.datas.token, userId: login.datas.userId });
+                this.getUserAsync({ token: login.data.token, userId: login.data.userId });
                 console.log('login', login);
             } catch (error) {
                 console.log(error)
@@ -44,7 +44,7 @@ export default createModel({
             try {
                 const user = await serviceProvider.UserService().getUser(payload.token, payload.userId);
                 console.log(user);
-                this.updateUser(user.datas);
+                this.updateUser(user.data);
                 serviceProvider.NavigatorService().navigate(ScreenNames.Choose)
             } catch (error) {
                 console.log(error)

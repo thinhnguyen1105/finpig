@@ -29,7 +29,9 @@ async function putUser(req, res) {
         }
         try {
             let user = await User.findById(userId);
+
             let bankingCard = await BankingCard.findById(user.bankingCard);
+            bankingCard.fullName = req.body.fullName;
             bankingCard.cardType = req.body.cardType;
             bankingCard.cardId = req.body.cardId;
             bankingCard.securityCode = req.body.securityCode;

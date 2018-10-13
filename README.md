@@ -1,6 +1,6 @@
 Except login & register, all queries require:
 headers['x-access-token'] = ${TOKEN}
-url : http://zimportant.ddns.net:3000/api/v1/
+
 email:
 finpig2018@gmail.com
 hackjunction_finpig@2018
@@ -78,7 +78,7 @@ API:
 		email
 	} ---> {
 
-		status: [success, failure],
+		status: [success, failure]
 		auth: [true/false]
 		data: {
 			info: //detail info of status 'failure'

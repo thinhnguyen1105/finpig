@@ -60,9 +60,10 @@ async function register(req, res) {
 				balance: 0
 			});
 			let bankingCard = await BankingCard.create({
-				cardType: 'visa',
-				cardId: 'cardId',
-				securityCode: 'securityCode'
+				fullName: '',
+				cardType: '',
+				cardId: '',
+				securityCode: ''
 			});
 			user.budget = budget._id;
 			user.bankingCard = bankingCard._id;

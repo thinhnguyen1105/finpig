@@ -172,6 +172,18 @@ API:
 		}
 	}
 
+/member_ship/{memberShip} POST {}
+	----> {
+		status
+		auth
+		data: {
+			saving,
+			balance,
+			expense,
+			ownerType,
+			ownerId
+		}
+	}
 
 DATABASE:
 User {

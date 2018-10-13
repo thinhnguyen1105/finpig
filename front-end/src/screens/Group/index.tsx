@@ -35,11 +35,11 @@ class Test1 extends React.Component<Props, State> {
         };
     }
     _renderItem = ({ item }: { item: DataCarousel }) => {
-        // const onPress = () => {
-        //     this.props.navigation.navigate(ScreenNames.GroupDetail);
-        // }
+        const onPress = () => {
+            this.props.navigation.navigate(ScreenNames.GroupDetail);
+        }
         return (
-            <TouchableOpacity style={{ backgroundColor: '#fff', paddingVertical: 12, marginBottom: 20 }}>
+            <TouchableOpacity style={{ backgroundColor: '#fff', paddingVertical: 12, marginBottom: 20 }} onPress={onPress}>
                 <Image
                     source={item.url}
                     style={{ width: '100%', height: 140 }} />

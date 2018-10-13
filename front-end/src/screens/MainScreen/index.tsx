@@ -63,7 +63,8 @@ class Test1 extends React.Component<Props, State> {
 
                                 <AppText>Saving</AppText>
                             </TouchableOpacity>
-                            <TouchableOpacity style={{ paddingVertical: 10, justifyContent: 'center', alignItems: 'center' }}>
+                            <TouchableOpacity style={{ paddingVertical: 10, justifyContent: 'center', alignItems: 'center' }}
+                                onPress={() => this.props.navigation.navigate(ScreenNames.Group)}>
                                 <View style={styles.button}>
                                     <Image
                                         source={require('../../../assets/main_screen/button_main3.png')}

@@ -10,10 +10,12 @@ import styles from './styles';
 import AppText from '../../components/AppText';
 import ScreenNames from '../screen-names';
 import BasicLayout from '../../components/BasicLayout';
+import { UserState } from '../../store/models/user-profile/interface';
 
 export interface Props extends NavigationScreenProps {
     number: number;
     updateNumber: () => void;
+    userProfile: UserState;
 }
 export interface State {
 
@@ -28,16 +30,14 @@ class Test1 extends React.Component<Props, State> {
     }
 
     render(): React.ReactNode {
+        const { userProfile } = this.props;
         return (
             <BasicLayout image noHeader>
                 <View style={styles.container}>
                     <View style={{ alignItems: 'center', marginBottom: 12 }}>
                         <View></View>
-                        <AppText style={{ color: '#fff', fontSize: 24, fontFamily: 'iciel-bold' }}>Lorem</AppText>
-                        <View>
-                            <AppText style={{ color: '#fff', }}>@Lorem</AppText>
-                        </View>
-
+                        <AppText style={{ color: '#fff', fontSize: 24, fontFamily: 'iciel-bold' }}>{userProfile.info.name}</AppText>
+                        <AppText style={{ color: '#fff', }}>@Lorem</AppText>
                     </View>
                     <View style={{ backgroundColor: '#fff', width: getLayout().deviceWidth - 50, paddingVertical: 12, borderRadius: 5 }}>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: '5%', paddingBottom: 12, borderBottomColor: '#ddd', borderBottomWidth: 1 }}>
@@ -45,7 +45,8 @@ class Test1 extends React.Component<Props, State> {
                             <AppText>$10.000</AppText>
                         </View>
                         <View style={{ flexWrap: 'wrap', paddingHorizontal: '10%', flexDirection: 'row', justifyContent: 'space-between', paddingVertical: '5%', paddingBottom: '10%' }}>
-                            <TouchableOpacity style={{ paddingVertical: 10, justifyContent: 'center', alignItems: 'center' }}>
+                            <TouchableOpacity style={{ paddingVertical: 10, justifyContent: 'center', alignItems: 'center' }}
+                                onPress={() => this.props.navigation.navigate(ScreenNames.Spending)}>
                                 <View style={styles.button}>
                                     <Image
                                         source={require('../../../assets/main_screen/button_main1.png')}
@@ -91,7 +92,7 @@ class Test1 extends React.Component<Props, State> {
                         </View>
                     </View>
 
-                    <View style={{ position: 'absolute', bottom: 90,   }}>
+                    <View style={{ position: 'absolute', bottom: 90, }}>
                         <Image
                             source={require('../../../assets/main_screen/pig.png')}
                             style={{ height: 170, width: 100, }}
@@ -109,7 +110,7 @@ class Test1 extends React.Component<Props, State> {
     }
 }
 const mapState = (state: AppState) => ({
-    number: state.appState.number,
+    userProfile: state.userProfile,
 });
 
 const mapDispatch = ({ appState }: RematchDispatch<models>) => ({

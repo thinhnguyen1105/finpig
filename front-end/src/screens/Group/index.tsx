@@ -15,6 +15,7 @@ import ScreenNames from '../screen-names';
 export interface Props extends NavigationScreenProps {
     number: number;
     updateNumber: () => void;
+    getGroupAsync: () => void;
 }
 export interface State {
 
@@ -33,6 +34,10 @@ class Test1 extends React.Component<Props, State> {
         this.state = {
             opacity: new Animated.Value(1),
         };
+    }
+
+    componentDidMount(): void {
+        this.props.getGroupAsync();
     }
     _renderItem = ({ item }: { item: DataCarousel }) => {
         const onPress = () => {
@@ -85,7 +90,7 @@ class Test1 extends React.Component<Props, State> {
             goals: '$100'
         }]
         return (
-            <BasicLayout image>
+            <BasicLayout image title="Group">
                 <View style={{
                     paddingHorizontal: '10%',
                     paddingTop: '7%'
@@ -107,7 +112,8 @@ const mapState = (state: AppState) => ({
     number: state.appState.number,
 });
 
-const mapDispatch = ({ appState }: RematchDispatch<models>) => ({
+const mapDispatch = ({ group }: RematchDispatch<models>) => ({
+    getGroupAsync: () => { group.getGroupAsync('') }
 });
 
 export default connect(mapState, mapDispatch as any)(Test1);

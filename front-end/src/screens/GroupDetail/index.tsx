@@ -30,13 +30,13 @@ class GroupDetail extends React.Component<Props, State> {
 
     render(): React.ReactNode {
         return (
-            <BasicLayout image>
+            <BasicLayout image title= " Japan - Hokaldo">
                 <View style={styles.container}>
                     <View style={{ width: '100%', justifyContent: 'center', alignItems: 'center' }}>
-                        <AppText style={{ fontFamily: 'iciel-bold', fontSize: 22, color: '#fff' }}>
+                        {/* <AppText style={{ fontFamily: 'iciel-bold', fontSize: 22, color: '#fff' }}>
                             Japan - Hokaldo
-                        </AppText>
-                        <AppText style={{ color: '#fff', fontSize: 20 }}>
+                        </AppText> */}
+                        <AppText style={{ color: '#fff', fontSize: 20, paddingTop: 30 }}>
                             Goal: $100.00
                         </AppText>
 

@@ -27,7 +27,7 @@ class Test1 extends React.Component<Props, State> {
 
     render(): React.ReactNode {
         return (
-            <BasicLayout noBackButton>
+            <BasicLayout noHeader>
                 <View style={styles.container}>
                     <Text style={{ fontFamily: 'iciel-bold', fontSize: 28, paddingVertical: '15%' }}>CHOOSE YOUR SAVING</Text>
                     <View style={{ width: '100%', paddingHorizontal: '5%' }}>

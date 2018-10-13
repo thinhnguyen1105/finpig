@@ -30,7 +30,7 @@ class Test1 extends React.Component<Props, State> {
 
     render(): React.ReactNode {
         return (
-            <BasicLayout noBackButton >
+            <BasicLayout noHeader >
                 <View style={styles.container}>
                     <View style={styles.logoContainer}>
                         <Image
@@ -85,8 +85,6 @@ const mapState = (state: AppState) => ({
 });
 
 const mapDispatch = ({ appState }: RematchDispatch<models>) => ({
-    updateNumber: (value: string) => { appState.updateNumber(''); },
-
 });
 
 export default connect(mapState, mapDispatch as any)(Test1);

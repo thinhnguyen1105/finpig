@@ -30,7 +30,7 @@ class Pig extends React.Component<Props, State> {
 
     render(): React.ReactNode {
         return (
-            <BasicLayout noBackButton>
+            <BasicLayout noHeader>
                 <View style={styles.container}>
                     <View style={{ backgroundColor: config().primaryColor, paddingHorizontal: 20, borderRadius: 5, paddingVertical: 20 }}>
                         <AppText style={{ flexWrap: 'wrap', textAlign: 'center', color: '#fff', fontSize: 18 }}>You haven't fed the pig yet. Give it some food!</AppText>

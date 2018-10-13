@@ -5,6 +5,9 @@ import Pig from './Pig';
 import ChoosePig from './Game/ChoosePig';
 import MainScreen from './MainScreen';
 import Race from './Game/Race';
+import Saving from './Saving';
+import Group from './Group';
+import GroupDetail from './GroupDetail';
 
 export {
     Choose,
@@ -13,5 +16,8 @@ export {
     ChoosePig,
     Pig,
     MainScreen,
-    Race
+    Race,
+    Saving,
+    Group,
+    GroupDetail
 };

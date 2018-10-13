@@ -3,6 +3,7 @@ import * as React from 'react';
 import styles from './styles';
 import { ViewStyle, StatusBar, View, TouchableOpacity, Image } from 'react-native';
 import { withNavigation, NavigationScreenProps } from 'react-navigation';
+import { getLayout } from '../../helpers/get-layout';
 
 export interface IProps {
     styles?: ViewStyle;
@@ -13,9 +14,9 @@ export interface IProps {
 export interface IState { }
 class BasicLayout extends React.Component<IProps, IState> {
     render(): React.ReactNode {
-        const containerStyle = this.props.styles ? { ...styles.Container, ...this.props.styles } : styles.Container;
+        const containerStyle = this.props.styles ? { ...styles.Container, ...this.props.styles, } : styles.Container;
         return (
-            <Container style={containerStyle}>
+            <Container style={{ ...containerStyle, backgroundColor: this.props.image ? '#ececec' : '#fff' }}>
                 {!this.props.noHeader &&
 
                     <TouchableOpacity style={{ paddingLeft: 12 }} onPress={() => (this.props as any).navigation.goBack()}>
@@ -24,7 +25,13 @@ class BasicLayout extends React.Component<IProps, IState> {
                             style={{ width: 20, height: 20 }}
                             resizeMode="contain" />
                     </TouchableOpacity>}
-
+                {this.props.image &&
+                    <Image
+                        source={require('../../../assets/main_screen/background_pink.png')}
+                        style={{
+                            width: getLayout().deviceWidth, height: getLayout().deviceHeight / 2, position: 'absolute', zIndex: -1,
+                        }}
+                    />}
                 <View style={{ flex: 1 }}>
                     {this.props.children}
                 </View>

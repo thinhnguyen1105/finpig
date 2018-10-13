@@ -58,8 +58,6 @@ const mapState = (state: AppState) => ({
 });
 
 const mapDispatch = ({ appState }: RematchDispatch<models>) => ({
-    updateNumber: (value: string) => { appState.updateNumber(''); },
-
 });
 
 export default connect(mapState, mapDispatch as any)(Test1);

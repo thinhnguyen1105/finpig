@@ -108,6 +108,13 @@ class Test1 extends React.Component<Props, State> {
                         <View style={{ flexDirection: 'row', paddingHorizontal: '5%' }}>
                             <TouchableOpacity style={{ backgroundColor: '#fff', padding: 20, alignItems: 'center', justifyContent: 'center', marginHorizontal: 10 }}>
                                 <Image
+                                    source={require('../../../assets/my_saving_screen/wallet.png')}
+                                    style={{ height: 40, width: 40 }} 
+                                    resizeMode="contain"/>
+                                <AppText style={{ fontSize: 12, paddingTop: 10 }}>Add group</AppText>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={{ backgroundColor: '#fff', padding: 20, alignItems: 'center', justifyContent: 'center', marginHorizontal: 10 }}>
+                                <Image
                                     source={require('../../../assets/my_saving_screen/bag.png')}
                                     style={{ height: 40, width: 40 }} />
                                 <AppText style={{ fontSize: 12, paddingTop: 10 }}>Withdraw</AppText>

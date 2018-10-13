@@ -2,10 +2,9 @@ import { ViewStyle, TextStyle, ImageStyle } from "react-native";
 import { View } from 'native-base';
 
 const container: ViewStyle = {
-    paddingHorizontal: '15%',
+    paddingHorizontal: '10%',
     alignItems: 'center',
     // justifyContent: 'center',
-    flex: 1,
 }
 
 const button: ImageStyle = {
@@ -16,7 +15,13 @@ const button: ImageStyle = {
     backgroundColor: '#ddd',
     borderRadius: 60
 }
+
+const row: ViewStyle = {
+    flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 20, flex: 1,
+    paddingVertical: 20 
+}
 export default {
     button,
     container,
+    row
 }

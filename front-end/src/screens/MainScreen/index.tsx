@@ -1,5 +1,5 @@
 import React from 'react';
-import { Animated, View, Text, Image, TouchableOpacity, ImageBackground, ToolbarAndroidComponent } from 'react-native';
+import { Animated, View, Text, Image, TouchableOpacity } from 'react-native';
 import { NavigationScreenProps } from 'react-navigation';
 import { connect } from 'react-redux';
 import { RematchDispatch } from '@rematch/core';
@@ -7,10 +7,9 @@ import { models } from '../../store';
 import { AppState } from '../../store/state';
 import { getLayout } from '../../helpers/get-layout';
 import styles from './styles';
-import { Item, Input, Icon, Button } from 'native-base';
-import BasicLayout from '../../components/BasicLayout';
 import AppText from '../../components/AppText';
 import ScreenNames from '../screen-names';
+import BasicLayout from '../../components/BasicLayout';
 
 export interface Props extends NavigationScreenProps {
     number: number;
@@ -30,10 +29,7 @@ class Test1 extends React.Component<Props, State> {
 
     render(): React.ReactNode {
         return (
-            <View style={{ flex: 1 }} >
-                <Image
-                    source={require('../../../assets/main_screen/background_pink.png')}
-                    style={{ width: getLayout().deviceWidth, height: getLayout().deviceHeight / 2, position: 'absolute' }} />
+            <BasicLayout image noHeader>
                 <View style={styles.container}>
                     <View style={{ alignItems: 'center', marginBottom: 12 }}>
                         <View></View>
@@ -41,7 +37,7 @@ class Test1 extends React.Component<Props, State> {
                         <AppText style={{ color: '#fff', }}>@Lorem</AppText>
                     </View>
                     <View style={{ backgroundColor: '#fff', width: getLayout().deviceWidth - 50, paddingVertical: 12, borderRadius: 5 }}>
-                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: '5%', paddingBottom: 12, borderBottomColor: '#ddd', borderBottomWidth: 1}}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: '5%', paddingBottom: 12, borderBottomColor: '#ddd', borderBottomWidth: 1 }}>
                             <AppText>My balance</AppText>
                             <AppText>$10.000</AppText>
                         </View>
@@ -56,7 +52,8 @@ class Test1 extends React.Component<Props, State> {
 
                                 <AppText>Spending</AppText>
                             </TouchableOpacity>
-                            <TouchableOpacity style={{ paddingVertical: 10, justifyContent: 'center', alignItems: 'center' }}>
+                            <TouchableOpacity style={{ paddingVertical: 10, justifyContent: 'center', alignItems: 'center' }}
+                                onPress={() => this.props.navigation.navigate(ScreenNames.Saving)}>
                                 <View style={styles.button}>
                                     <Image
                                         source={require('../../../assets/main_screen/button_main2.png')}
@@ -77,7 +74,7 @@ class Test1 extends React.Component<Props, State> {
                                 <AppText>Group</AppText>
                             </TouchableOpacity>
                             <TouchableOpacity style={{ paddingVertical: 10, justifyContent: 'center', alignItems: 'center' }}
-                            onPress={() => this.props.navigation.navigate(ScreenNames.ChoosePig)}>
+                                onPress={() => this.props.navigation.navigate(ScreenNames.ChoosePig)}>
                                 <View style={styles.button}>
                                     <Image
                                         source={require('../../../assets/main_screen/button_main4.png')}
@@ -90,12 +87,12 @@ class Test1 extends React.Component<Props, State> {
                         </View>
                     </View>
                     <Image
-                    source={require('../../../assets/main_screen/pig.png')}
-                    style={{height: 170, width: 100, position: 'absolute', bottom: 40}}
-                    resizeMode="contain"/>
+                        source={require('../../../assets/main_screen/pig.png')}
+                        style={{ height: 170, width: 100, position: 'absolute', bottom: 40 }}
+                        resizeMode="contain" />
                 </View>
 
-            </View >
+            </BasicLayout >
         );
     }
 }

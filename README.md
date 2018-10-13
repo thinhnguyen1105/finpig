@@ -7,17 +7,10 @@ hackjunction_finpig@2018
 
 API:
 /user
-	/{id} GET -> {
-		requestStatus: {
-			status: [success, failure],
-			auth: [true/false],
-			data: {
-				[info: //detail info of status 'failure']
-				[token: //return from login, register]
-				[userId: //return from login, register]
-			}
-		}
-		info: {
+	/{userId} GET -> {
+		status: [success, failure],
+		auth: [true/false],
+		data: {
 			_id: String
 			name: String
 			username: String
@@ -26,59 +19,103 @@ API:
 			avatar: String (url)
 			exp: Number
 			groups: Array(GROUP_ID)
+			budget: BUDGET_ID
 
 			transactions: Array(TRANSACTION_ID) // transaction of user
 		}
 	}
 
-	/{id}/group GET -> {
-		requestStatus: {
-			status: [success, failure],
-			auth: [true/false]
-		}
-		info: {
-			group: Array(GROUP_ID)
+	/{userId}/groups GET -> {
+		status: [success, failure],
+		auth: [true/false]
+		data: {
+			groups: Array(GROUP_ID)
 		}
 	}
 
 /auth
 	/login POST username, password -> {
-		requestStatus: {
-			status: [success, failure],
-			auth: [true/false]
-		}
-		info: {
-			token: String,
+		status: [success, failure],
+		auth: [true/false]
+		data: {
+			info: //detail info of status 'failure'
+			token: TOKEN
 		}
 	}
 
 	/register POST {
-			name,
-			username, 
-			password, 
-			phoneNumber, 
-			email
-		} ---> {
-		requestStatus: {
-			status: [success, failure],
-			auth: [true/false]
-		}
-		info: {
-			status: // Username already exists, Password not secure
-			token: String,
+		name,
+		username, 
+		password, 
+		age,
+		phoneNumber, 
+		email
+	} ---> {
+
+		status: [success, failure],
+		auth: [true/false]
+		data: {
+			info: //detail info of status 'failure'
+			token: TOKEN
+			userId: USER_ID
 		}
 	}
 
 /group
-	/{id} GET -> {
-		_id: String
+	/ POST {
 		name: String
 		description: String
 		goal: Number
-		user: Array(USER_ID)
-		budget: BUDGET_ID
+		endDate: Date
+		userIds: Array(USER_ID) //exclude sender
+	} --> {
+		status: [success, failure],
+		auth: [true/false]
+		data: {
+			_id: String
+			name: String
+			description: String
+			goal: Number
+			userIds: Array(USER_ID)
+			budget: BUDGET_ID
+		}
+	}
+	/{groupId} GET -> {
+		status: [success, failure],
+		auth: [true/false]
+		data: {
+			_id: String
+			name: String
+			description: String
+			goal: Number
+			user: Array(USER_ID)
+			budget: BUDGET_ID
 
-		transactions: Array(TRANSACTION_ID) //transaction of group
+			transactions: Array(TRANSACTION_ID) //transaction of group
+		}
+	}
+
+/budget
+	/{budgetId} GET -> {
+		status: [success, failure],
+		auth: [true/false]
+		data: {
+			_id: String,
+			ownerId: String,
+			saving: Number,
+			expense: Number
+		}
+	}
+
+/owner
+	/{ownerId} GET -> {
+		status: [success, failure],
+		auth: [true/false]
+		data: {
+			_id: String,
+			ownerType: [user, group, finpig]
+			ownerId: String [GROUP_ID, USER_ID,”FinPig”]
+		}
 	}
 
 /transaction POST {
@@ -90,15 +127,12 @@ API:
 		amount: {} (USD)
 
 	} ---> {
-		requestStatus: {
-			status: [success, failure],
-			auth: [true/false]
-		}
-		info: {
+		status: [success, failure],
+		auth: [true/false]
+		data: {
 			transaction: TRANSACTION_ID
 		}
 	}
-
 
 DATABASE:
 User {
@@ -126,21 +160,18 @@ Group {
 	name: String
 	description: String
 	goal: Number
-	users: Array(USER_ID)
+	startDate: String
+	endDate: String
+	userIds: Array(USER_ID)
 	budget: BUDGET_ID
 }
 
 Budget {
 	_id: String
-	owner: OWNER_ID
+	ownerType: [user, group]
+	ownerId: String [GROUP_ID, USER_ID]
 	saving: Number
 	expense: Number
-}
-
-Owner {
-	_id: String
-	ownerType: [user, group,finpig]
-	ownerId: String [GROUP_ID, USER_ID,”FinPig”]
 }
 
 Transaction { //buy goods, save money

@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = mongoose.model('User');
-const { sendFailure, sendSuccess, verifyJwt } = require('./jsonHelper');
+const Budget = mongoose.model('Budget');
+const { sendFailure, sendSuccess, verifyJwt } = require('./helper');
 
 async function register(req, res) {
     let data = {
@@ -39,7 +40,7 @@ async function register(req, res) {
         });
     }
 
-    data.password = bcrypt.hashSync(data.password, 8);
+	data.password = bcrypt.hashSync(data.password, 8);
 
 	User.create(data, function(err, user) {
 		if (err) {
@@ -49,10 +50,27 @@ async function register(req, res) {
 			expiresIn: process.env.TOKEN_EXPIRES
 		});
 
-        return sendSuccess(res, true, {
-            token: token,
-            userId: user._id
-        });
+		Budget.create({
+			ownerType: 'user',
+			ownerId: user._id,
+			saving: 0,
+			expense: 0
+		}, function(err, budget) {
+			if (err) {
+				return sendFailure(res, false);
+			}
+
+			user.budget = budget._id;
+			user.save((err, updatedUser) => {
+				if (err) {
+					return sendFailure(res, false);
+				}
+				return sendSuccess(res, true, {
+					token: token,
+					userId: user._id
+				});
+			});
+		});
 	});
 }
 

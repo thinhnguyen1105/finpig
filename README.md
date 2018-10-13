@@ -66,6 +66,7 @@ API:
 		name: String
 		description: String
 		goal: Number
+		startDate: Date
 		endDate: Date
 		userIds: Array(USER_ID) //exclude sender
 	} --> {

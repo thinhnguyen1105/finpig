@@ -22,8 +22,8 @@ function getUser(req, res) {
     });
 }
 
-await function putUser(req, res) {
-    verifyJwt(req, res, (userId) => {
+async function putUser(req, res) {
+    verifyJwt(req, res, async (userId) => {
         if (req.params.userId !== userId) {
             return sendFailure(res, false);
         }

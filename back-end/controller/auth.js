@@ -43,7 +43,7 @@ async function register(req, res) {
 
 	data.password = bcrypt.hashSync(data.password, 8);
 
-	User.create(data, function(err, user) {
+	User.create(data, async function(err, user) {
 		if (err) {
 			return sendFailure(res, false);
 		}

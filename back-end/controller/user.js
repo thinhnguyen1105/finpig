@@ -5,7 +5,7 @@ const { sendFailure, sendSuccess, verifyJwt } = require('./jsonHelper');
 
 function getUser(req, res) {
     verifyJwt(req, res, (userId) => {
-        if (req.params.userId != userId) {
+        if (req.params.userId !== userId) {
             return sendFailure(res, false);
         }
         User.findById(userId, { 
@@ -16,7 +16,7 @@ function getUser(req, res) {
             if (err) {
                 return sendFailure(res);
             }
-            return res.send(user);
+            return sendSuccess(res, true, user);
         });
     });
 }

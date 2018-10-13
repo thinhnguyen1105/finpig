@@ -7,17 +7,10 @@ hackjunction_finpig@2018
 
 API:
 /user
-	/{id} GET -> {
-		requestStatus: {
-			status: [success, failure],
-			auth: [true/false],
-			data: {
-				[info: //detail info of status 'failure']
-				[token: //return from login, register]
-				[userId: //return from login, register]
-			}
-		}
-		info: {
+	/{userId} GET -> {
+		status: [success, failure],
+		auth: [true/false],
+		data: {
 			_id: String
 			name: String
 			username: String
@@ -43,12 +36,11 @@ API:
 
 /auth
 	/login POST username, password -> {
-		requestStatus: {
-			status: [success, failure],
-			auth: [true/false]
-		}
-		info: {
-			token: String,
+		status: [success, failure],
+		auth: [true/false]
+		data: {
+			info: //detail info of status 'failure'
+			token: TOKEN
 		}
 	}
 
@@ -59,15 +51,15 @@ API:
 			phoneNumber, 
 			email
 		} ---> {
-		requestStatus: {
+
 			status: [success, failure],
 			auth: [true/false]
+			data: {
+				info: //detail info of status 'failure'
+				token: TOKEN
+				userId: USER_ID
+			}
 		}
-		info: {
-			status: // Username already exists, Password not secure
-			token: String,
-		}
-	}
 
 /group
 	/{id} GET -> {
@@ -90,11 +82,9 @@ API:
 		amount: {} (USD)
 
 	} ---> {
-		requestStatus: {
-			status: [success, failure],
-			auth: [true/false]
-		}
-		info: {
+		status: [success, failure],
+		auth: [true/false]
+		data: {
 			transaction: TRANSACTION_ID
 		}
 	}

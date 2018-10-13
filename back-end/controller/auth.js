@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = mongoose.model('User');
 const Budget = mongoose.model('Budget');
-const { sendFailure, sendSuccess, verifyJwt } = require('./jsonHelper');
+const { sendFailure, sendSuccess, verifyJwt } = require('./helper');
 
 async function register(req, res) {
     let data = {

@@ -47,6 +47,7 @@ API:
 		name,
 		username, 
 		password, 
+		age,
 		phoneNumber, 
 		email
 	} ---> {
@@ -61,6 +62,24 @@ API:
 	}
 
 /group
+	/ POST {
+		name: String
+		description: String
+		goal: Number
+		endDate: Date
+		userIds: Array(USER_ID) //exclude sender
+	} --> {
+		status: [success, failure],
+		auth: [true/false]
+		data: {
+			_id: String
+			name: String
+			description: String
+			goal: Number
+			userIds: Array(USER_ID)
+			budget: BUDGET_ID
+		}
+	}
 	/{groupId} GET -> {
 		status: [success, failure],
 		auth: [true/false]
@@ -141,7 +160,9 @@ Group {
 	name: String
 	description: String
 	goal: Number
-	users: Array(USER_ID)
+	startDate: String
+	endDate: String
+	userIds: Array(USER_ID)
 	budget: BUDGET_ID
 }
 

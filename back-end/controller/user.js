@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const jwt = require('jsonwebtoken');
-const { sendFailure, sendSuccess, verifyJwt } = require('./jsonHelper');
+const { sendFailure, sendSuccess, verifyJwt } = require('./helper');
 
 function getUser(req, res) {
     verifyJwt(req, res, (userId) => {

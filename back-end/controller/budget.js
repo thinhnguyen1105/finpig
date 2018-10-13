@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Budget = mongoose.model('Budget');
 const jwt = require('jsonwebtoken');
-const { sendFailure, sendSuccess, verifyJwt } = require('./jsonHelper');
+const { sendFailure, sendSuccess, verifyJwt } = require('./helper');
 
 function getBudget(req, res) {
     let budgetId = req.params.budgetId;

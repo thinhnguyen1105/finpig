@@ -91,7 +91,7 @@ class Test1 extends React.Component<Props, State> {
                         </View>
                     </View>
 
-                    <View style={{ position: 'absolute', bottom: 90 }}>
+                    <View style={{ position: 'absolute', bottom: 90,   }}>
                         <Image
                             source={require('../../../assets/main_screen/pig.png')}
                             style={{ height: 170, width: 100, }}
@@ -100,10 +100,9 @@ class Test1 extends React.Component<Props, State> {
                             <View style={{ backgroundColor: '#19fa73', height: 5, width: '40%', zIndex: 2, position: 'absolute' }}></View>
                             <View style={{ backgroundColor: 'green', height: 5, width: '100%', zIndex: -1, top: 0, position: 'absolute' }}></View>
                         </View>
-
+                        <Text style={{ bottom: -25, alignSelf: 'center' }}>Level: 20</Text>
                     </View>
 
-                    <Text style={{ bottom: -100 }}>Level: 20</Text>
                 </View>
             </BasicLayout >
         );

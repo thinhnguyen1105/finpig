@@ -17,6 +17,11 @@ const BudgetSchema = new Schema ({
         default: 0,
         required: true
     },
+    balance: {
+        type: Number,
+        default: 0,
+        required: true
+    },
     expense: {
         type: Number,
         default: 0,

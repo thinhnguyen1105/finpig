@@ -10,8 +10,8 @@ const container: ViewStyle = {
 }
 
 const button: ImageStyle = {
-    height: 120,
-    width: 120,
+    height: 100,
+    width: 100,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#ddd',

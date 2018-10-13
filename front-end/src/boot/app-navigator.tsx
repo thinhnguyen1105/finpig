@@ -18,7 +18,7 @@ class AppNavigator extends React.Component<any, any> {
 			[ScreenNames.Race]: { screen: Race },
 		},
 		{
-			initialRouteName: ScreenNames.Login,
+			initialRouteName: ScreenNames.MainScreen,
 			headerMode: 'none'
 		}
 	);

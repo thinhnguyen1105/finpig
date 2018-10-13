@@ -16,7 +16,7 @@ class AppNavigator extends React.Component<any, any> {
 			[ScreenNames.Pig]: { screen: Pig },
 		},
 		{
-			initialRouteName: ScreenNames.Pig,
+			initialRouteName: ScreenNames.ChoosePig,
 			headerMode: 'none'
 		}
 	);

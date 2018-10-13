@@ -30,7 +30,7 @@ class Test1 extends React.Component<Props, State> {
 
     render(): React.ReactNode {
         return (
-            <BasicLayout >
+            <BasicLayout noBackButton >
                 <View style={styles.container}>
                     <View style={styles.logoContainer}>
                         <Image

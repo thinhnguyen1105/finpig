@@ -1,6 +1,6 @@
 Except login & register, all queries require:
 headers['x-access-token'] = ${TOKEN}
-
+url : http://zimportant.ddns.net:3000/api/v1/
 email:
 finpig2018@gmail.com
 hackjunction_finpig@2018

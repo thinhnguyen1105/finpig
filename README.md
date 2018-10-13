@@ -101,21 +101,11 @@ API:
 		status: [success, failure],
 		auth: [true/false]
 		data: {
-			_id: String,
-			ownerId: String,
-			saving: Number,
+			_id: String
+			ownerType: [user, group]
+			ownerId: String [GROUP_ID, USER_ID]
+			saving: Number
 			expense: Number
-		}
-	}
-
-/owner
-	/{ownerId} GET -> {
-		status: [success, failure],
-		auth: [true/false]
-		data: {
-			_id: String,
-			ownerType: [user, group, finpig]
-			ownerId: String [GROUP_ID, USER_ID,”FinPig”]
 		}
 	}
 

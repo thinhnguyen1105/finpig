@@ -4,6 +4,7 @@ const {
     GroupSchema,
     OwnerSchema,
     BudgetSchema,
+    BankingCardSchema,
     TransactionSchema
 } = require('./schema');
 
@@ -12,3 +13,4 @@ mongoose.model('Group', GroupSchema);
 mongoose.model('Budget', BudgetSchema);
 mongoose.model('Transaction', TransactionSchema);
 mongoose.model('Owner', OwnerSchema);
+mongoose.model('BankingCard', BankingCardSchema);

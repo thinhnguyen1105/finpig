@@ -36,8 +36,16 @@ class Test1 extends React.Component<Props, State> {
                 <View style={styles.container}>
                     <View style={{ alignItems: 'center', marginBottom: 12 }}>
                         <View></View>
+<<<<<<< HEAD
                         <AppText style={{ color: '#fff', fontSize: 24, fontFamily: 'iciel-bold' }}>{userProfile.name}</AppText>
                         <AppText style={{ color: '#fff', }}>@Lorem</AppText>
+=======
+                        <AppText style={{ color: '#fff', fontSize: 24, fontFamily: 'iciel-bold' }}>Lorem</AppText>
+                        <View>
+                            <AppText style={{ color: '#fff', }}>@Lorem</AppText>
+                        </View>
+
+>>>>>>> 9d4e646619cb81acc9c379f8e7346b30edd5aaf0
                     </View>
                     <View style={{ backgroundColor: '#fff', width: getLayout().deviceWidth - 50, paddingVertical: 12, borderRadius: 5 }}>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: '5%', paddingBottom: 12, borderBottomColor: '#ddd', borderBottomWidth: 1 }}>

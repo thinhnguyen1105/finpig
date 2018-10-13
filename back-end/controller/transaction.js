@@ -11,7 +11,7 @@ const MAXIMUM_AMOUNT = 1000000;
 const TIME_DELAY_TRANSACTION = 2000;
 
 async function postBank(req, res) {
-    let type = req.body.type;
+    let type = 'balance';
     let senderId = req.body.sender;
     let receiverId = req.body.receiver;
     let amount = parseInt(req.body.amount);
@@ -99,7 +99,12 @@ async function isProperPermission(sender, userId) {
         try {
             let group = await Group.findById(sender.ownerId);
             if (group.managerId.toString() === userId) {
-                return true;
+                if (sender.balance >= group.goal) {
+                    // group can only spend money when reached its goal
+                    return true;
+                } else {
+                    return false;
+                }
             }       
         } catch (err) {
             return false;
@@ -110,9 +115,10 @@ async function isProperPermission(sender, userId) {
 }
 
 async function postTransfer(req, res) {
-    let type = 'expense';
     let senderId = req.body.sender;
+    let senderType = 'balance';
     let receiverId = req.body.receiver;
+    let receiverType = req.body.receiverType;
     let amount = parseInt(req.body.amount);
 
     let sender, receiver;
@@ -135,41 +141,43 @@ async function postTransfer(req, res) {
                 sender: sender.ownerId,
                 receiver: receiver.ownerId,
                 amount: amount,
-                type: type,
+                type: receiverType,
                 status: 'pending'
             });
         } catch (err) {
             return sendFailure(res);
         }
 
-        if (amount < 0 || amount > MAXIMUM_AMOUNT || sender.expense < amount) {
+        if (amount < 0 || amount > MAXIMUM_AMOUNT || sender[senderType] < amount) {
             return sendFailure(res, true, {
                 info: "Sorry, you don't have enough money"
             });
         }
 
-        try {
-            let totalExchange = await TotalExchange.findOne({
-                sender: senderId,
-                receiver: receiverId
-            });
-            if (!totalExchange) {
-                totalExchange = await TotalExchange.create({
+        if (senderId !== receiverId) {
+            try {
+                let totalExchange = await TotalExchange.findOne({
                     sender: senderId,
                     receiver: receiverId
                 });
-            }
+                if (!totalExchange) {
+                    totalExchange = await TotalExchange.create({
+                        sender: senderId,
+                        receiver: receiverId
+                    });
+                }
 
-            totalExchange.amount += amount;
-            totalExchange = await totalExchange.save();
-        } catch (err) {
-            return sendFailure(res);
+                totalExchange.amount += amount;
+                totalExchange = await totalExchange.save();
+            } catch (err) {
+                return sendFailure(res);
+            }
         }
 
         try {
-            sender[type] -= amount;
+            sender[senderType] -= amount;
             sender = await sender.save();
-            receiver[type] += amount;
+            receiver[receiverType] += amount;
             receiver = await receiver.save();
         } catch (err) {
             return sendFailure(res, true, {

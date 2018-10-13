@@ -8,11 +8,11 @@ const BankingCardSchema = new Schema({
         required: true
     },
     cardId: {
-        type: Number,
+        type: String,
         required: true,
     },
     securityCode: {
-        type: Number,
+        type: String,
         required: true
     }
 });

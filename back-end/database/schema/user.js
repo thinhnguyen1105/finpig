@@ -32,6 +32,9 @@ const UserSchema = new Schema({
         default: 0,
         required: true,
     },
+    email: {
+        type: String,
+    },
     budget: {
         type: Schema.Types.ObjectId
     },

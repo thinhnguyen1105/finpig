@@ -5,6 +5,10 @@ email:
 finpig2018@gmail.com
 hackjunction_finpig@2018
 
+balance: bank to balance
+expense: balance to expense
+saving: balance to saving
+
 API:
 /user
 	/{userId} GET -> {
@@ -18,12 +22,34 @@ API:
 			age: Number
 			avatar: String (url)
 			exp: Number
+			email: String
 			groups: Array(GROUP_ID)
 			budget: BUDGET_ID
 
 			transactions: Array(TRANSACTION_ID) // transaction of user
 		}
 	}
+
+	/{userId} PUT {
+			//update info
+		} ---> {
+			status: [success, failure],
+			auth: [true/false],
+			data: {
+				_id: String
+				name: String
+				username: String
+
+				age: Number
+				avatar: String (url)
+				exp: Number
+				email: String
+				groups: Array(GROUP_ID)
+				budget: BUDGET_ID
+
+				transactions: Array(TRANSACTION_ID) // transaction of user
+			}
+		}
 
 	/{userId}/groups GET -> {
 		status: [success, failure],
@@ -105,6 +131,7 @@ API:
 			ownerType: [user, group]
 			ownerId: String [GROUP_ID, USER_ID]
 			saving: Number
+			balance: Number
 			expense: Number
 		}
 	}
@@ -112,12 +139,28 @@ API:
 // get from card to finpig
 /transaction 
 	/bank POST {
-		type: [saving, expense]
 		sender: BUDGET_ID
 		receiver: BUDGET_ID
 		amount: {} (USD)
 	} ---> {
-		status: [success, failure],
+		status: [success, failure]
+		auth: [true/false]
+		data: {
+			sender: BUDGET_ID
+			receiver: BUDGET_ID
+			date: date
+			amount: {} USD
+			type: [saving, expense, balance]
+			status: [success, failure, pending]
+		}
+	}
+	/transfer POST { //user -> saving, expense
+		sender: BUDGET_ID
+		receiver: BUDGET_ID
+		receiverType: ['saving', 'expense']
+		amount: {} (USD)
+	} ---> {
+		status: [success, failure]
 		auth: [true/false]
 		data: {
 			sender: BUDGET_ID
@@ -127,10 +170,6 @@ API:
 			type: [saving, expense]
 			status: [success, failure, pending]
 		}
-	}
-	/transfer POST { //user -> group
-		sender: BUDGET_ID
-		receiver: BUDGET_ID
 	}
 
 
@@ -144,15 +183,16 @@ User {
 	age: String
 	avatar: String (url)
 	exp: Number
-	group: Array(GROUP_ID)
+	groups: Array(GROUP_ID)
 	budget: BUDGET_ID
+	bankingCard: CARD_ID
+}
 
-	bankingCard: {
-		_id: String
-		cardType: [VISA]
-		cardId: Number
-		securityCode: Number
-	}
+BankingCard: {
+	_id: String
+	cardType: ['visa']
+	cardId: String
+	securityCode: String
 }
 
 Group {
@@ -172,6 +212,7 @@ Budget {
 	ownerType: [user, group]
 	ownerId: String [GROUP_ID, USER_ID]
 	saving: Number
+	balance: Number
 	expense: Number
 }
 
@@ -181,7 +222,7 @@ Transaction { //buy goods, save money
 	receiver: BUDGET_ID
 	date: date
 	amount: {} USD
-	type: [saving, expense]
+	type: [saving, expense, balance]
 	status: [success, failure, pending]
 }
 

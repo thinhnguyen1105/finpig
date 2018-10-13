@@ -34,7 +34,10 @@ class Test1 extends React.Component<Props, State> {
                     <View style={{ alignItems: 'center', marginBottom: 12 }}>
                         <View></View>
                         <AppText style={{ color: '#fff', fontSize: 24, fontFamily: 'iciel-bold' }}>Lorem</AppText>
-                        <AppText style={{ color: '#fff', }}>@Lorem</AppText>
+                        <View>
+                            <AppText style={{ color: '#fff', }}>@Lorem</AppText>
+                        </View>
+
                     </View>
                     <View style={{ backgroundColor: '#fff', width: getLayout().deviceWidth - 50, paddingVertical: 12, borderRadius: 5 }}>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: '5%', paddingBottom: 12, borderBottomColor: '#ddd', borderBottomWidth: 1 }}>

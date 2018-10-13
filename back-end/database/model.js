@@ -4,11 +4,13 @@ const {
     GroupSchema,
     BudgetSchema,
     BankingCardSchema,
-    TransactionSchema
+    TransactionSchema,
+    TotalExchangeSchema,
 } = require('./schema');
 
 mongoose.model('User', UserSchema);
 mongoose.model('Group', GroupSchema);
 mongoose.model('Budget', BudgetSchema);
-mongoose.model('Transaction', TransactionSchema);
 mongoose.model('BankingCard', BankingCardSchema);
+mongoose.model('Transaction', TransactionSchema);
+mongoose.model('TotalExchange', TotalExchangeSchema);

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const TransactionSchema = new Schema({
+const TotalExchangeSchema = new Schema({
     sender: {
         type: Schema.Types.ObjectId,
         required: true
@@ -19,17 +19,12 @@ const TransactionSchema = new Schema({
         type: Number,
         required: true
     },
-    type: {
-        type: String,
-        enum: ['saving', 'expense'],
-        required: true
-    },
     status: {
         type: String,
         enum: ['success', 'failure', 'pending']
     }
 }, {
-    collection: 'Transactions'
+    collection: 'TotalExchanges'
 });
 
-module.exports = TransactionSchema;
+module.exports = TotalExchangeSchema;

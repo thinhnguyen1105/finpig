@@ -109,19 +109,36 @@ API:
 		}
 	}
 
-/transaction POST {
-		token: {}
-
-		tag: [saving, expense]
-		type: [individual, group]
-		receiver_id: {}
+// get from card to finpig
+/transaction 
+	/user POST {
+		type: [saving, expense]
 		amount: {} (USD)
-
 	} ---> {
 		status: [success, failure],
 		auth: [true/false]
 		data: {
-			transaction: TRANSACTION_ID
+			sender: BUDGET_ID
+			receiver: BUDGET_ID
+			date: date
+			amount: {} USD
+			type: [saving, expense]
+			status: [success, failure, pending]
+		}
+	}
+	/group POST {
+		groupId: GROUP_ID
+		amount: {} (USD)
+	} ---> {
+		status: [success, failure],
+		auth: [true/false]
+		data: {
+			sender: BUDGET_ID
+			receiver: BUDGET_ID
+			date: date
+			amount: {} USD
+			type: [saving, expense]
+			status: [success, failure, pending]
 		}
 	}
 
@@ -171,5 +188,14 @@ Transaction { //buy goods, save money
 	receiver: BUDGET_ID
 	date: date
 	amount: {} USD
+	type: [saving, expense]
 	status: [success, failure, pending]
+}
+
+TotalExchange {
+	_id: String
+	sender: BUDGET_ID
+	receiver: BUDGET_ID
+	date: date
+	amount: {} USD
 }

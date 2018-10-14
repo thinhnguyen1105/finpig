@@ -123,10 +123,7 @@ class Test1 extends React.Component<Props, State> {
     }
 }
 const mapState = (state: AppState) => ({
-<<<<<<< HEAD
     budgetData: state.budgetData,
-=======
->>>>>>> 71e2bf4a63e808e19a2a69c199f939aa3e7b0370
     userProfile: state.userProfile,
 });
 

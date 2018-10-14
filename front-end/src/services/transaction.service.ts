@@ -1,7 +1,7 @@
 import { CreateBankParams, CreateTransferParams } from './interface.service';
 const url = 'http://zimportant.ddns.net:3000/api/v1/transaction';
 
-export default class TransactionService {
+export default class AuthService {
 
   createBank(token: string, params: CreateBankParams): Promise<any> {
     return fetch(`${url}/bank`, {

@@ -24,6 +24,7 @@ const textCenterBold: TextStyle = {
   textAlign: 'center',
   fontWeight: 'bold',
 }
+
 export default {
   button,
   container,

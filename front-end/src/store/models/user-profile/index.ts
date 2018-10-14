@@ -1,10 +1,11 @@
 
 import { createModel } from '@rematch/core';
 import { UserState, UserInfo } from './interface';
-import { LoginParam, GetUserParam } from '../../../services/interface.service';
+import { LoginParam, GetUserParam, RegisterParam } from '../../../services/interface.service';
 import { AppState } from '../../state';
 import serviceProvider from '../../../services/service.provider';
 import ScreenNames from '../../../screens/screen-names';
+import { Toast } from 'native-base';
 
 const defaultState: UserState = {
     info: {
@@ -72,6 +73,22 @@ export default createModel({
                 const user = await serviceProvider.UserService().getUser(payload.token, payload.userId);
                 console.log(user);
                 this.updateUser(user.data);
+            } catch (error) {
+                console.log(error)
+            }
+        },
+        async register(payload: RegisterParam, _rootState: AppState): Promise<any> {
+            try {
+                const user = await serviceProvider.AuthService().register(payload);
+                if (user.status === 'success') {
+                    serviceProvider.NavigatorService().navigate(ScreenNames.Login);
+                } else {
+                    Toast.show({
+                        text: 'please re-input',
+                        duration: 3000
+                    })
+                }
+                console.log(user);
             } catch (error) {
                 console.log(error)
             }

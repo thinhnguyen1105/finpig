@@ -14,6 +14,7 @@ import { Button, Icon, Spinner } from 'native-base'
 import { BudgetData } from '../../store/models/budget-info/interface';
 import { Membership } from '../../store/models/membership/interface';
 import config from '../../config';
+import moment from 'moment';
 
 export interface Props extends NavigationScreenProps {
     budgetData: BudgetData;
@@ -126,7 +127,7 @@ class Test1 extends React.Component<Props, State> {
                         <AppText style={{ color: '#fff', fontFamily: 'iciel-bold' }}>{cardTypeColor[item.cardType].name}</AppText>
                         <View style={{ flexDirection: 'row' }}>
                             <AppText style={{ color: '#fff', fontFamily: 'iciel-bold' }}>Expiry Date: </AppText>
-                            <AppText style={{ color: '#fff', paddingTop: 4 }}>{item.purchaseDate}</AppText>
+                            <AppText style={{ color: '#fff', paddingTop: 4 }}>{moment(moment(item.purchaseDate).add(item.timeLimit, 'd')).format("MMM Do YY")}</AppText>
                         </View>
                     </View>
                 </View>

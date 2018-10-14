@@ -19,10 +19,10 @@ export default createModel({
                 ...payload
             };
         },
-        updateMembership: (state: MembershipState, payload: MembershipState) => {
+        updateMembership: (state: MembershipState, payload: Membership[]) => {
             return {
                 ...state,
-                ...payload
+                memberships: [...payload]
             };
         },
     },

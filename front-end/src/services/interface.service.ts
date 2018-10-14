@@ -16,6 +16,7 @@ export interface LoginParam {
 export interface GetUserParam {
     token: string;
     userId: string;
+<<<<<<< HEAD
 }
 
 export interface GetBudgetParam {
@@ -44,4 +45,6 @@ export interface CreateTransferParams {
     receiver: string;
     receiverType: ['saving', 'expense'];
     amount: object;
+=======
+>>>>>>> 71e2bf4a63e808e19a2a69c199f939aa3e7b0370
 }

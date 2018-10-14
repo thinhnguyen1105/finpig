@@ -1,7 +1,13 @@
+<<<<<<< HEAD
 import { CreateGroupParams } from './interface.service';
 const url = 'http://zimportant.ddns.net:3000/api/v1/group';
 
 export default class GroupService {
+=======
+const url = 'http://zimportant.ddns.net:3000/api/v1/group';
+
+export default class AuthService {
+>>>>>>> 71e2bf4a63e808e19a2a69c199f939aa3e7b0370
 
     getGroup(token: string, groupId: string): Promise<any> {
         return fetch(`${url}/${groupId}`, {
@@ -20,6 +26,7 @@ export default class GroupService {
                 console.error(error);
             });
     }
+<<<<<<< HEAD
     createGroup(params: CreateGroupParams, token: string): Promise<any> {
         return fetch(`${url}`, {
             method: 'GET',
@@ -37,4 +44,6 @@ export default class GroupService {
                 console.error(error);
             });
     }
+=======
+>>>>>>> 71e2bf4a63e808e19a2a69c199f939aa3e7b0370
 }

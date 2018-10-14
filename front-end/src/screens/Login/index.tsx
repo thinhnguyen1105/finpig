@@ -34,7 +34,11 @@ class Test1 extends React.Component<Props, State> {
     }
 
     login = () => {
+<<<<<<< HEAD
         this.props.loginAsync({ username: this.state.username, password: this.state.password })
+=======
+        this.props.loginAsync({username: this.state.username, password: this.state.password})
+>>>>>>> 71e2bf4a63e808e19a2a69c199f939aa3e7b0370
     }
 
     render(): React.ReactNode {

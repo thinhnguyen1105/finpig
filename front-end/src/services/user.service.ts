@@ -20,6 +20,7 @@ export default class AuthService {
             });
     }
 
+<<<<<<< HEAD
     editUser(token: string, userId: string): Promise<any> {
         return fetch(`${url}/${userId}`, {
             method: 'PUT',
@@ -38,6 +39,8 @@ export default class AuthService {
             });
     }
 
+=======
+>>>>>>> 71e2bf4a63e808e19a2a69c199f939aa3e7b0370
     getUserGroup(token: string, userId: string): Promise<any> {
         return fetch(`${url}/${userId}/groups`, {
             method: 'GET',

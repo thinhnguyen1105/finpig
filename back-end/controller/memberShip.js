@@ -29,9 +29,17 @@ const PLAN = {
     },
 }
 
-async function getPlan(req, res) {
+async function getPlanType(req, res) {
     verifyJwt(req, res, (userId) => {
         sendSuccess(res, true, PLAN);
+    });
+}
+
+async function getPlan(req, res) {
+    let memberShipId = req.params.memberShipId;
+    verifyJwt(req, res, async (userId) => {
+        let memberShip = await MemberShip.findById(memberShipId);
+        sendSuccess(res, true, memberShip);
     });
 }
 
@@ -87,5 +95,6 @@ async function purchase(req, res, plan) {
 
 module.exports = {
     getPlan,
+    getPlanType,
     postPlan
 };

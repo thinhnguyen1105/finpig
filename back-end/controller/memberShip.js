@@ -68,7 +68,7 @@ async function purchase(req, res, plan) {
             let budget = await Budget.findById(user.budget);
             if (budget.balance < plan.total) {
                 return sendFailure(res, true, {
-                    info: 'Sorry, you don\t have enough money to purchase this card'
+                    info: 'Sorry, you don\'t have enough money to purchase this card'
                 });
             }
             budget.balance -= plan.total;

@@ -18,7 +18,8 @@ export interface Props extends NavigationScreenProps {
     budgetData: BudgetData
 }
 export interface State {
-
+    isVisibleWithdraw: boolean;
+    isVisibleTopup: boolean;
 }
 
 export interface DataCarousel {
@@ -32,7 +33,8 @@ class Test1 extends React.Component<Props, State> {
     constructor(props: any) {
         super(props);
         this.state = {
-            opacity: new Animated.Value(1),
+            isVisibleWithdraw: false,
+            isVisibleTopup: false,
         };
     }
     _renderItem = ({ item }: { item: DataCarousel }) => {
@@ -116,13 +118,15 @@ class Test1 extends React.Component<Props, State> {
                                     resizeMode="contain" />
                                 <AppText style={{ fontSize: 12, paddingTop: 10 }}>Add group</AppText>
                             </TouchableOpacity>
-                            <TouchableOpacity style={{ backgroundColor: '#fff', padding: 20, alignItems: 'center', justifyContent: 'center', marginHorizontal: 10 }}>
+                            <TouchableOpacity style={{ backgroundColor: '#fff', padding: 20, alignItems: 'center', justifyContent: 'center', marginHorizontal: 10 }}
+                                onPress={() => this.setState({ isVisibleWithdraw: true })}>
                                 <Image
                                     source={require('../../../assets/my_saving_screen/bag.png')}
                                     style={{ height: 40, width: 40 }} />
                                 <AppText style={{ fontSize: 12, paddingTop: 10 }}>Withdraw</AppText>
                             </TouchableOpacity>
-                            <TouchableOpacity style={{ backgroundColor: '#fff', padding: 20, alignItems: 'center', justifyContent: 'center', marginHorizontal: 10 }}>
+                            <TouchableOpacity style={{ backgroundColor: '#fff', padding: 20, alignItems: 'center', justifyContent: 'center', marginHorizontal: 10 }}
+                                onPress={() => this.setState({ isVisibleTopup: true })}>
                                 <Image
                                     source={require('../../../assets/my_saving_screen/topup.png')}
                                     style={{ height: 50, width: 50 }}
@@ -174,19 +178,36 @@ class Test1 extends React.Component<Props, State> {
                 <Modal
                     animationType="slide"
                     transparent={true}
-                    visible={true}
+                    visible={this.state.isVisibleTopup}
                 >
-                    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingHorizontal: '10%', backgroundColor: 'rgba(0,0,0,0.5)' }}>
-                        <View style={{ backgroundColor: config().primaryColor, paddingVertical: 30, paddingHorizontal: 35, borderRadius: 10 }}>
-                            <AppText style={{ color: '#fff' }}>Amount</AppText>
+                    <TouchableOpacity
+                        style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingHorizontal: '10%', backgroundColor: 'rgba(0,0,0,0.5)' }}
+                        onPress={() => this.setState({ isVisibleTopup: false })}>
+                        <View style={{ backgroundColor: '#fff', paddingVertical: 30, paddingHorizontal: 35, borderRadius: 10, alignItems: 'center', justifyContent: 'center', }}>
+                            <AppText style={{ color: '#000' }}>Amount</AppText>
                             <TextInput
-                                style={{ paddingVertical: 12, borderBottomColor: '#fff', borderBottomWidth: 1, color: '#fff', width: 100 }}
+                                style={{ paddingVertical: 12, borderBottomColor: '#000', borderBottomWidth: 1, color: '#000', width: 150, textAlign: 'center', fontFamily: 'iciel-bold', fontSize: 22 }}
                             />
-                            <Button full style={{ marginVertical: 12, borderRadius: 5 }}>
+                            <Button full style={{ marginVertical: 12, borderRadius: 5, backgroundColor: config().primaryColor }}>
                                 <AppText style={{ color: '#fff' }}>Withdraw</AppText>
                             </Button>
                         </View>
-                    </View>
+                    </TouchableOpacity>
+
+                </Modal>
+                <Modal
+                    animationType="slide"
+                    transparent={true}
+                    visible={this.state.isVisibleWithdraw}
+                    onShow={() => setTimeout(() => this.setState({ isVisibleWithdraw: false }), 2000)}
+                >
+                    <TouchableOpacity
+                        style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingHorizontal: '10%', backgroundColor: 'rgba(0,0,0,0.5)' }}
+                        onPress={() => this.setState({ isVisibleWithdraw: false })}>
+                        <View style={{ backgroundColor: config().primaryColor, paddingVertical: 30, paddingHorizontal: 35, borderRadius: 10, alignItems: 'center', justifyContent: 'center', }}>
+                            <AppText style={{ fontFamily: 'iciel-bold', fontSize: 20, textAlign: 'center', color: '#fff' }}>You have successfully withdrawed the saving to balance account</AppText>
+                        </View>
+                    </TouchableOpacity>
 
                 </Modal>
             </BasicLayout>

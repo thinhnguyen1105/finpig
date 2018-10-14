@@ -9,6 +9,7 @@ import Saving from './Saving';
 import Group from './Group';
 import GroupDetail from './GroupDetail';
 import Spending from './Spending';
+import CardDetail from './CardDetail';
 
 export {
     Choose,
@@ -21,5 +22,6 @@ export {
     Saving,
     Group,
     GroupDetail,
-    Spending
+    Spending,
+    CardDetail,
 };

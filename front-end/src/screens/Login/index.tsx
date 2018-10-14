@@ -90,11 +90,11 @@ class Test1 extends React.Component<Props, State> {
     }
 }
 const mapState = (state: AppState) => ({
-    number: state.appState.number, 
+    number: state.appState.number,
 });
 
 const mapDispatch = ({ userProfile }: RematchDispatch<models>) => ({
-    loginAsync: (param: LoginParam) => { userProfile.loginAsync(param) }
+    loginAsync: (param: LoginParam) => { userProfile.loginAsync(param as any) }
 });
 
 export default connect(mapState, mapDispatch as any)(Test1);

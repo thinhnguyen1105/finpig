@@ -1,10 +1,8 @@
 
 import { createModel } from '@rematch/core';
 import { GroupState, Group } from './interface';
-import { LoginParam, GetUserParam } from '../../../services/interface.service';
 import { AppState } from '../../state';
 import serviceProvider from '../../../services/service.provider';
-import ScreenNames from '../../../screens/screen-names';
 
 const defaultState: GroupState = {
     groups: []

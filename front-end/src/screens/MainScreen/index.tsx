@@ -11,11 +11,13 @@ import AppText from '../../components/AppText';
 import ScreenNames from '../screen-names';
 import BasicLayout from '../../components/BasicLayout';
 import { UserState } from '../../store/models/user-profile/interface';
+import { GetBudgetParam } from '../../services/interface.service';
 
 export interface Props extends NavigationScreenProps {
     number: number;
     updateNumber: () => void;
     userProfile: UserState;
+    getBudgetAsync: (param: GetBudgetParam) => void;
 }
 export interface State {
 
@@ -28,6 +30,11 @@ class Test1 extends React.Component<Props, State> {
             opacity: new Animated.Value(1),
         };
     }
+    // componentDidMount() {
+    //     this.props.getBudgetAsync({ token: this.state.username, budgetId: this.state.password })
+    // }
+
+
 
     render(): React.ReactNode {
         const { userProfile } = this.props;
@@ -98,7 +105,7 @@ class Test1 extends React.Component<Props, State> {
                             style={{ height: 170, width: 100, }}
                             resizeMode="contain" />
                         <View style={{ bottom: -15 }}>
-                            <View style={{ backgroundColor: '#19fa73', height: 5, width: '40%', zIndex: 2, position: 'absolute' }}></View>
+                            <View style={{ backgroundColor: '#19fa73', height: 5, width: `${this.props.userProfile.info.exp}%`, zIndex: 2, position: 'absolute' }}></View>
                             <View style={{ backgroundColor: 'green', height: 5, width: '100%', zIndex: -1, top: 0, position: 'absolute' }}></View>
                         </View>
                         <Text style={{ bottom: -25, alignSelf: 'center' }}>Level: 20</Text>
@@ -110,10 +117,12 @@ class Test1 extends React.Component<Props, State> {
     }
 }
 const mapState = (state: AppState) => ({
+    budgetData: state.budgetData,
     userProfile: state.userProfile,
 });
 
-const mapDispatch = ({ appState }: RematchDispatch<models>) => ({
+const mapDispatch = ({ budgetData }: RematchDispatch<models>) => ({
+    getBudgetAsync: (param: GetBudgetParam) => { budgetData.getBudgetAsync(param) }
 });
 
 export default connect(mapState, mapDispatch as any)(Test1);

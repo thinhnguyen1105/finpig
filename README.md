@@ -78,7 +78,7 @@ API:
 		email
 	} ---> {
 
-		status: [success, failure],
+		status: [success, failure]
 		auth: [true/false]
 		data: {
 			info: //detail info of status 'failure'
@@ -172,6 +172,18 @@ API:
 		}
 	}
 
+/member_ship/{memberShip} POST {}
+	----> {
+		status
+		auth
+		data: {
+			saving,
+			balance,
+			expense,
+			ownerType,
+			ownerId
+		}
+	}
 
 DATABASE:
 User {
@@ -190,7 +202,8 @@ User {
 
 BankingCard: {
 	_id: String
-	cardType: ['visa']
+	fullName: String
+	cardType: String
 	cardId: String
 	securityCode: String
 }

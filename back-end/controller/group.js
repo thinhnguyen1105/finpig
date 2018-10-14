@@ -53,16 +53,13 @@ async function putGroup(req, res) {
                     });
                 }
             } else if (action === 'remove') {
-                console.log('ok1');
-                group.userIds = groups.userIds.filter(item => item.toString() !== requestUserId);
-                if (requestUser.groups) {
+                group.userIds = group.userIds.filter(item => item.toString() !== requestUserId);
+                if (!!requestUser.groups) {
                     requestUser.groups = requestUser.groups.filter(item => item.toString() !== group._id.toString());
                 }
-                console.log('ok2');
             }
             group = await group.save();
             requestUser = await requestUser.save();
-            console.log('ok3');
 
             return sendSuccess(res, true, group);
         } catch (err) {

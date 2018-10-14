@@ -198,6 +198,18 @@ API:
 			}
 		}
 
+	/{memberShipId} GET -> {
+			status,
+			auth,
+			data: {
+				total: Number,
+				saving: Number,
+				purchaseDate: Date,
+				cardType: String,
+				timeLimit: Days
+			}
+		}
+
 	/{memberShip} POST {}
 		----> {
 			status

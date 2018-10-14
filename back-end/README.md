@@ -1,3 +1,4 @@
+
 Except login & register, all queries require:
 headers['x-access-token'] = ${TOKEN}
 url : http://zimportant.ddns.net:3000/api/v1/
@@ -56,7 +57,7 @@ API:
 
 	//get list groups of user with specific ID
 	/{userId}/groups GET -> {
-		status: [success, failure],
+		status: budg[success, failure],
 		auth: [true/false]
 		data: {
 			groups: Array(GROUP_ID)
@@ -232,13 +233,6 @@ API:
 	----> {
 		status
 		auth
-		data: {
-			total: Number,
-			saving: Number,
-			purchaseDate: Date,
-			cardType: String,
-			timeLimit: Days
-		}
 	}
 
 	//get infor purchused memberShip with memberShipId

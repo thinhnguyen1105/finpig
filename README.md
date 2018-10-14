@@ -11,6 +11,7 @@ saving: balance to saving
 
 API:
 /user
+	//get user information
 	/{userId} GET -> {
 		status: [success, failure],
 		auth: [true/false],
@@ -30,6 +31,7 @@ API:
 		}
 	}
 
+	//update user information
 	/{userId} PUT {
 			//update info
 		} ---> {
@@ -52,6 +54,7 @@ API:
 			}
 		}
 
+	//get list groups of user with specific ID
 	/{userId}/groups GET -> {
 		status: [success, failure],
 		auth: [true/false]
@@ -60,6 +63,7 @@ API:
 		}
 	}
 
+	//get list memberShip of user with specific ID
 	/{userId}/member_ships GET -> {
 		status: [success, failure],
 		auth: [true/false]
@@ -69,6 +73,7 @@ API:
 	}
 
 /auth
+	//login user
 	/login POST username, password -> {
 		status: [success, failure],
 		auth: [true/false]
@@ -78,6 +83,7 @@ API:
 		}
 	}
 
+	//register user
 	/register POST {
 		name,
 		username, 
@@ -97,6 +103,7 @@ API:
 	}
 
 /group
+	// create new Group
 	/ POST {
 		name: String
 		description: String
@@ -116,6 +123,7 @@ API:
 			budget: BUDGET_ID
 		}
 	}
+	// get information of group
 	/{groupId} GET -> {
 		status: [success, failure],
 		auth: [true/false]
@@ -131,7 +139,25 @@ API:
 		}
 	}
 
+	//add member
+	/{groupId} PUT {
+		action: 'add'
+		userId: USER_ID
+	} --> {
+		status:
+		auth:
+	}
+	//delete member
+	/{groupId} PUT {
+		action: 'remove'
+		userId: USER_ID
+	} --> {
+		status:
+		auth:
+	}
+
 /budget
+	//get information of a budget with budgetId
 	/{budgetId} GET -> {
 		status: [success, failure]
 		auth: [true/false]
@@ -145,8 +171,8 @@ API:
 		}
 	}
 
-// get from card to finpig
 /transaction 
+	// transfer from banking card to finpig user
 	/bank POST {
 		sender: BUDGET_ID
 		receiver: BUDGET_ID
@@ -163,6 +189,7 @@ API:
 			status: [success, failure, pending]
 		}
 	}
+	// tranfer between user in finpig
 	/transfer POST { //user -> saving, expense
 		sender: BUDGET_ID
 		receiver: BUDGET_ID
@@ -182,40 +209,43 @@ API:
 	}
 
 /member_ship
-	/ GET
-		-> {
-			status,
-			auth,
-			data: {
-				silver: {
-					total: Number,
-					saving: Number,
-					purchaseDate: Date,
-					cardType: String,
-					timeLimit: Days
-				},
-				gold: ...
-				diamond: ...
-			}
-		}
-
-	/{memberShipId} GET -> {
-			status,
-			auth,
-			data: {
+	//list memberShips which user can purchase
+	/ GET -> {
+		status,
+		auth,
+		data: {
+			silver: {
 				total: Number,
 				saving: Number,
 				purchaseDate: Date,
 				cardType: String,
 				timeLimit: Days
-			}
+			},
+			gold: ...
+			diamond: ...
 		}
+	}
+	//purchase a memberShip with type
+	/ POST {
+		cardType: 'silver', 'gold', 'diamond'
+	}
+	----> {
+		status
+		auth
+	}
 
-	/{memberShip} POST {}
-		----> {
-			status
-			auth
+	//get infor purchused memberShip with memberShipId
+	/{memberShipId} GET -> {
+		status,
+		auth,
+		data: {
+			total: Number,
+			saving: Number,
+			purchaseDate: Date,
+			cardType: String,
+			timeLimit: Days
 		}
+	}
 
 DATABASE:
 User {

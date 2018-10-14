@@ -44,7 +44,7 @@ async function getPlan(req, res) {
 }
 
 async function postPlan(req, res) {
-    switch (req.params.memberShip) {
+    switch (req.body.cardType) {
         case 'silver':
             purchase(req, res, PLAN.silver);
             break;

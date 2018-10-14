@@ -11,13 +11,14 @@ import AppText from '../../components/AppText';
 import ScreenNames from '../screen-names';
 import BasicLayout from '../../components/BasicLayout';
 import { UserState } from '../../store/models/user-profile/interface';
-import { GetBudgetParam } from '../../services/interface.service';
+import { BudgetState, BudgetData } from '../../store/models/budget-info/interface';
 
 export interface Props extends NavigationScreenProps {
     number: number;
     updateNumber: () => void;
     userProfile: UserState;
-    getBudgetAsync: (param: GetBudgetParam) => void;
+    getBudgetAsync: () => void;
+    budgetData: BudgetData
 }
 export interface State {
 
@@ -30,26 +31,27 @@ class Test1 extends React.Component<Props, State> {
             opacity: new Animated.Value(1),
         };
     }
-    // componentDidMount() {
-    //     this.props.getBudgetAsync({ token: this.state.username, budgetId: this.state.password })
-    // }
+    componentDidMount() {
+        this.props.getBudgetAsync()
+    }
 
 
 
     render(): React.ReactNode {
-        const { userProfile } = this.props;
+        const { userProfile, budgetData } = this.props;
+        console.log(budgetData);
         return (
             <BasicLayout image noHeader>
                 <View style={styles.container}>
                     <View style={{ alignItems: 'center', marginBottom: 12 }}>
                         <View></View>
                         <AppText style={{ color: '#fff', fontSize: 24, fontFamily: 'iciel-bold' }}>{userProfile.info.name}</AppText>
-                        <AppText style={{ color: '#fff', }}>@Lorem</AppText>
+                        <AppText style={{ color: '#fff', }}>{userProfile.info.email}</AppText>
                     </View>
                     <View style={{ backgroundColor: '#fff', width: getLayout().deviceWidth - 50, paddingVertical: 12, borderRadius: 5 }}>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: '5%', paddingBottom: 12, borderBottomColor: '#ddd', borderBottomWidth: 1 }}>
                             <AppText>My balance</AppText>
-                            <AppText>$10.000</AppText>
+                            <AppText>${budgetData.balance}</AppText>
                         </View>
                         <View style={{ flexWrap: 'wrap', paddingHorizontal: '10%', flexDirection: 'row', justifyContent: 'space-between', paddingVertical: '5%', paddingBottom: '10%' }}>
                             <TouchableOpacity style={{ paddingVertical: 10, justifyContent: 'center', alignItems: 'center' }}
@@ -108,7 +110,7 @@ class Test1 extends React.Component<Props, State> {
                             <View style={{ backgroundColor: '#19fa73', height: 5, width: `${this.props.userProfile.info.exp}%`, zIndex: 2, position: 'absolute' }}></View>
                             <View style={{ backgroundColor: 'green', height: 5, width: '100%', zIndex: -1, top: 0, position: 'absolute' }}></View>
                         </View>
-                        <Text style={{ bottom: -25, alignSelf: 'center' }}>Level: 20</Text>
+                        <Text style={{ bottom: -25, alignSelf: 'center' }}>Level: {Math.round(userProfile.info.exp / 100)}</Text>
                     </View>
 
                 </View>
@@ -117,12 +119,12 @@ class Test1 extends React.Component<Props, State> {
     }
 }
 const mapState = (state: AppState) => ({
-    budgetData: state.budgetData,
+    budgetData: state.budgetData.data,
     userProfile: state.userProfile,
 });
 
 const mapDispatch = ({ budgetData }: RematchDispatch<models>) => ({
-    getBudgetAsync: (param: GetBudgetParam) => { budgetData.getBudgetAsync(param) }
+    getBudgetAsync: () => { budgetData.getBudgetAsync('' as any) }
 });
 
 export default connect(mapState, mapDispatch as any)(Test1);

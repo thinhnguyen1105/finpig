@@ -52,7 +52,7 @@ API:
 		}
 
 	/{userId}/groups GET -> {
-		status: [success, failure],
+		status: budg[success, failure],
 		auth: [true/false]
 		data: {
 			groups: Array(GROUP_ID)

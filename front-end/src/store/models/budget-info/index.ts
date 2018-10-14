@@ -11,6 +11,7 @@ const defaultState: BudgetState = {
     expense: 0,
     _id: '',
     ownerType: '',
+    balance: 0,
     _v: 0,
   }
 };
@@ -27,10 +28,10 @@ export default createModel({
     },
   },
   effects: (_dispatch) => ({
-    async getBudgetAsync(payload: GetBudgetParam, _rootState: AppState): Promise<any> {
+    async getBudgetAsync(payload: string, rootState: AppState): Promise<any> {
       try {
-        const budget = await serviceProvider.BudgetServices().getBudget(payload.token, payload.budgetId);
-        console.log(budget);
+        const budget = await serviceProvider.BudgetServices().getBudget(rootState.userProfile.token, rootState.userProfile.info.budget);
+        console.log('butget', budget);
         this.updateBudget(budget.data)
       } catch (error) {
         console.log(error)

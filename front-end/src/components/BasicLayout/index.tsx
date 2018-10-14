@@ -1,4 +1,4 @@
-import { Container, Content, Left, Body, Right } from 'native-base';
+import { Container, Icon, Left, Body, Right } from 'native-base';
 import * as React from 'react';
 import styles from './styles';
 import { ViewStyle, StatusBar, View, TouchableOpacity, Image } from 'react-native';
@@ -12,6 +12,8 @@ export interface IProps {
     image?: boolean;
     noHeader?: boolean;
     title?: string;
+    add?: boolean;
+    onPressAdd?: () => void;
 }
 export interface IState { }
 class BasicLayout extends React.Component<IProps, IState> {
@@ -36,7 +38,12 @@ class BasicLayout extends React.Component<IProps, IState> {
 
                             </View>
                         </Body>
-                        <Right></Right>
+                        <Right>
+                            {this.props.add &&
+                                <TouchableOpacity style={{ paddingRight: 12 }} onPress={this.props.onPressAdd}>
+                                    <Icon name="add" style={{ fontSize: 30, color: '#fff', fontWeight: 'bold' }} />
+                                </TouchableOpacity>}
+                        </Right>
 
                     </View>
                 }

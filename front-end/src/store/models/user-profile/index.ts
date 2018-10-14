@@ -5,6 +5,7 @@ import { LoginParam, GetUserParam } from '../../../services/interface.service';
 import { AppState } from '../../state';
 import serviceProvider from '../../../services/service.provider';
 import ScreenNames from '../../../screens/screen-names';
+import { Toast } from 'native-base';
 
 const defaultState: UserState = {
     info: {
@@ -17,7 +18,8 @@ const defaultState: UserState = {
         username: '',
         age: 0,
         budget: '',
-        __v: 0
+        __v: 0,
+        email: ''
     },
     token: '',
 };
@@ -54,6 +56,13 @@ export default createModel({
                 const login = await serviceProvider.AuthService().login({ username: payload.username, password: payload.password });
 
                 if (login.status === 'failure') {
+                    Toast.show({
+                        text: "Wrong password or username!",
+                        buttonText: "Okay",
+                        duration: 3000,
+                        type: "danger"
+                    })
+
                     return;
                 } else {
                     this.getUserAsync({ token: login.data.token, userId: login.data.userId });

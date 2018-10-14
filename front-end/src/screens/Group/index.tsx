@@ -1,5 +1,5 @@
 import React from 'react';
-import { Animated, View, Text, Image, ScrollView, TouchableOpacity, FlatList } from 'react-native';
+import { Animated, View, Text, Image, ScrollView, TouchableOpacity, FlatList, Modal } from 'react-native';
 import { NavigationScreenProps } from 'react-navigation';
 import { connect } from 'react-redux';
 import { RematchDispatch } from '@rematch/core';
@@ -11,6 +11,8 @@ import Carousel from 'react-native-snap-carousel';
 import BasicLayout from '../../components/BasicLayout';
 import { getLayout } from '../../helpers/get-layout';
 import ScreenNames from '../screen-names';
+import config from '../../config';
+import { Item, Input } from 'native-base';
 
 export interface Props extends NavigationScreenProps {
     number: number;
@@ -90,7 +92,7 @@ class Test1 extends React.Component<Props, State> {
             goals: '$100'
         }]
         return (
-            <BasicLayout image title="Group">
+            <BasicLayout image title="Group" add>
                 <View style={{
                     paddingHorizontal: '10%',
                     paddingTop: '7%'
@@ -102,7 +104,39 @@ class Test1 extends React.Component<Props, State> {
                         showsVerticalScrollIndicator={false}
                     />
                 </View>
+                <Modal
+                    animationType="slide"
+                    transparent={true}
+                    visible={true}
+                    onShow={() => setTimeout(() => {
+                        this.setState({ winner: '' })
+                        this.props.navigation.navigate(ScreenNames.ChoosePig)
+                    }, 2000)}
+                >
+                    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingHorizontal: '10%', backgroundColor: 'rgba(0,0,0,0.5)' }}>
+                        <View style={{ backgroundColor: config().primaryColor, paddingVertical: 30, paddingHorizontal: 35, borderRadius: 10, }}>
+                            <Item regular style={{ width: '100%' }}>
+                                <Input placeholder='Regular Textbox' />
+                            </Item>
+                            <Item regular style={{ width: '100%' }}>
+                                <Input placeholder='Regular Textbox' />
+                            </Item>
+                            <Item regular style={{ width: '100%' }}>
+                                <Input placeholder='Regular Textbox' />
+                            </Item>
+                            <Item regular style={{ width: '100%' }}>
+                                <Input placeholder='Regular Textbox' />
+                            </Item>
+                            <Item regular style={{ width: '100%' }}>
+                                <Input placeholder='Regular Textbox' />
+                            </Item>
+                            <Item regular style={{ width: '100%' }}>
+                                <Input placeholder='Regular Textbox' />
+                            </Item>
+                        </View>
+                    </View>
 
+                </Modal>
 
             </BasicLayout>
         );

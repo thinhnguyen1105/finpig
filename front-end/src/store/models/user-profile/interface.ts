@@ -13,5 +13,6 @@ export interface UserInfo {
     username: string;
     age: number;
     budget: string;
-    __v: number
+    __v: number;
+    email: string
 }

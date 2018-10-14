@@ -14,6 +14,7 @@ export interface BudgetData {
   expense: number;
   _id: string;
   ownerType: string;
+  balance: number;
   _v: number;
 }
 

@@ -10,10 +10,10 @@ import AppText from '../../components/AppText';
 import Carousel from 'react-native-snap-carousel';
 import BasicLayout from '../../components/BasicLayout';
 import { getLayout } from '../../helpers/get-layout';
+import { BudgetData } from '../../store/models/budget-info/interface';
 
 export interface Props extends NavigationScreenProps {
-    number: number;
-    updateNumber: () => void;
+    budgetData: BudgetData
 }
 export interface State {
 
@@ -64,6 +64,7 @@ class Test1 extends React.Component<Props, State> {
     }
 
     render(): React.ReactNode {
+        const { budgetData } = this.props;
         const data: DataCarousel[] = [{
             url: require('../../../assets/my_saving_screen/japan.png'),
             name: 'Japan Trip',
@@ -92,7 +93,7 @@ class Test1 extends React.Component<Props, State> {
                             borderRadius: 30
                         }}>
                             <AppText style={{ color: '#fff' }}>My balance</AppText>
-                            <AppText style={{ color: '#fff', fontFamily: 'iciel-bold' }}>$10.000</AppText>
+                            <AppText style={{ color: '#fff', fontFamily: 'iciel-bold' }}>${budgetData.balance}</AppText>
                         </View>
                         <AppText style={{ color: '#fff', paddingTop: 8 }}>Account detail 09/11/2018</AppText>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%', paddingVertical: 16 }}>
@@ -102,7 +103,7 @@ class Test1 extends React.Component<Props, State> {
                             </View>
                             <View>
                                 <AppText style={{ color: '#fff' }}>Your Interst</AppText>
-                                <AppText style={{ color: '#fff', fontFamily: 'iciel-bold', fontSize: 18 }}>$100</AppText>
+                                <AppText style={{ color: '#fff', fontFamily: 'iciel-bold', fontSize: 18 }}>${budgetData.saving}</AppText>
                             </View>
                         </View>
                         <View style={{ flexDirection: 'row', paddingHorizontal: '5%' }}>
@@ -173,7 +174,7 @@ class Test1 extends React.Component<Props, State> {
     }
 }
 const mapState = (state: AppState) => ({
-    number: state.appState.number,
+    budgetData: state.budgetData.data,
 });
 
 const mapDispatch = ({ appState }: RematchDispatch<models>) => ({

@@ -11,10 +11,10 @@ import BasicLayout from '../../components/BasicLayout';
 import { getLayout } from '../../helpers/get-layout';
 import AppText from '../../components/AppText';
 import { Button, Icon } from 'native-base'
+import { BudgetData } from '../../store/models/budget-info/interface';
 
 export interface Props extends NavigationScreenProps {
-    number: number;
-    updateNumber: () => void;
+    budgetData: BudgetData;
 }
 export interface State {
 
@@ -64,26 +64,26 @@ class Test1 extends React.Component<Props, State> {
     }
     renderDataCard = ({ item }: { item: DataCard }) => {
         return (
-            <View style={{ marginHorizontal: 12, borderTopEndRadius: 5,borderTopStartRadius: 5 }}>
+            <View style={{ marginHorizontal: 12, borderTopEndRadius: 5, borderTopStartRadius: 5 }}>
                 <LinearGradient
                     colors={[cardTypeColor[item.type].startColor, cardTypeColor[item.type].endColor]}
-                    style={{ height: getLayout().deviceHeight / 2.7, width: getLayout().deviceWidth / 1.5, borderTopEndRadius: 5,borderTopStartRadius: 5 }}>
+                    style={{ height: getLayout().deviceHeight / 2.7, width: getLayout().deviceWidth / 1.5, borderTopEndRadius: 5, borderTopStartRadius: 5 }}>
                     <View style={{ borderBottomColor: '#fff', borderBottomWidth: 2, justifyContent: 'center', alignItems: 'center' }}>
                         <AppText style={{ paddingVertical: 16, color: '#fff', fontSize: 22, fontFamily: 'iciel-bold' }}>{item.name}</AppText>
 
                     </View>
-                    <View style={{ paddingHorizontal: '5%', paddingVertical: '8%' }}>
+                    <View style={{ paddingHorizontal: '5%', paddingVertical: 20 }}>
                         <View style={{ flexDirection: 'row', paddingVertical: 4 }}>
                             <AppText style={{ color: '#fff', fontFamily: 'iciel-bold' }}>Total value: </AppText>
-                            <AppText style={{ color: '#fff' }}>{item.totalValue}</AppText>
+                            <AppText style={{ color: '#fff', paddingTop: 4 }}>{item.totalValue}</AppText>
                         </View>
                         <View style={{ flexDirection: 'row', paddingVertical: 4 }}>
                             <AppText style={{ color: '#fff', fontFamily: 'iciel-bold' }}>Saving value: </AppText>
-                            <AppText style={{ color: '#fff' }}>{item.savingValue}</AppText>
+                            <AppText style={{ color: '#fff', paddingTop: 4 }}>{item.savingValue}</AppText>
                         </View>
                         <View style={{ flexDirection: 'row', paddingVertical: 4 }}>
                             <AppText style={{ color: '#fff', fontFamily: 'iciel-bold' }}>Total value: </AppText>
-                            <AppText style={{ color: '#fff' }}>{item.validPeriod}</AppText>
+                            <AppText style={{ color: '#fff', paddingTop: 4 }}>{item.validPeriod}</AppText>
                         </View>
                     </View>
 
@@ -112,7 +112,7 @@ class Test1 extends React.Component<Props, State> {
                         <AppText style={{ color: '#fff', fontFamily: 'iciel-bold' }}>{item.name}</AppText>
                         <View style={{ flexDirection: 'row' }}>
                             <AppText style={{ color: '#fff', fontFamily: 'iciel-bold' }}>Expiry Date: </AppText>
-                            <AppText style={{ color: '#fff' }}>{item.expiryDate}</AppText>
+                            <AppText style={{ color: '#fff', paddingTop: 4 }}>{item.expiryDate}</AppText>
                         </View>
                     </View>
                 </View>
@@ -183,7 +183,7 @@ class Test1 extends React.Component<Props, State> {
     }
 }
 const mapState = (state: AppState) => ({
-    number: state.appState.number,
+    budgetData: state.budgetData.data,
 });
 
 const mapDispatch = ({ appState }: RematchDispatch<models>) => ({

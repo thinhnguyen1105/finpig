@@ -103,7 +103,7 @@ const mapState = (state: AppState) => ({
 });
 
 const mapDispatch = ({ userProfile }: RematchDispatch<models>) => ({
-    loginAsync: (param: LoginParam) => { userProfile.loginAsync(param) }
+    loginAsync: (param: LoginParam) => { userProfile.loginAsync(param as any) }
 });
 
 export default connect(mapState, mapDispatch as any)(Test1);

@@ -1,7 +1,7 @@
 
 import { createModel } from '@rematch/core';
 import { UserState, UserInfo } from './interface';
-import { LoginParam, GetUserParam } from '../../../services/interface.service';
+import { LoginParam, GetUserParam, RegisterParam } from '../../../services/interface.service';
 import { AppState } from '../../state';
 import serviceProvider from '../../../services/service.provider';
 import ScreenNames from '../../../screens/screen-names';
@@ -97,6 +97,22 @@ export default createModel({
                 console.log(error)
             } finally {
                 this.updateBusyState(false);
+            }
+        },
+        async register(payload: RegisterParam, _rootState: AppState): Promise<any> {
+            try {
+                const user = await serviceProvider.AuthService().register(payload);
+                if (user.status === 'success') {
+                    serviceProvider.NavigatorService().navigate(ScreenNames.Login);
+                } else {
+                    Toast.show({
+                        text: 'please re-input',
+                        duration: 3000
+                    })
+                }
+                console.log(user);
+            } catch (error) {
+                console.log(error)
             }
         },
         async getUseGroupAsync(payload: GetUserParam, _rootState: AppState): Promise<any> {

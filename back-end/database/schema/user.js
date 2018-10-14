@@ -46,6 +46,9 @@ const UserSchema = new Schema({
     },
     bankingCard: {
         type: Schema.Types.ObjectId
+    },
+    purchasedMemberShip: {
+        type: [Schema.Types.ObjectId]
     }
 }, {
     collection: 'Users'

@@ -48,6 +48,7 @@ API:
 				budget: BUDGET_ID
 
 				transactions: Array(TRANSACTION_ID) // transaction of user
+				purchasedMemberShip: Array(MEMBER_SHIP_ID)
 			}
 		}
 

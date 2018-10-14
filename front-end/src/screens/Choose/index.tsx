@@ -34,7 +34,7 @@ class Test1 extends React.Component<Props, State> {
                         <View style={{ marginVertical: '3%', width: '100%' }}>
 
                             <TouchableOpacity style={{ ...styles.button, backgroundColor: '#bb457b' }}
-                                onPress={() => this.props.navigation.navigate(ScreenNames.Pig)}>
+                                onPress={() => this.props.navigation.navigate(ScreenNames.MainScreen)}>
                                 <Text style={styles.textButton}>BANK ACCOUNT</Text>
                             </TouchableOpacity>
 
@@ -42,7 +42,7 @@ class Test1 extends React.Component<Props, State> {
 
                         <View style={{ marginVertical: '3%', width: '100%' }}>
                             <TouchableOpacity style={styles.button}
-                                onPress={() => this.props.navigation.navigate(ScreenNames.Pig)}>
+                                onPress={() => this.props.navigation.navigate(ScreenNames.MainScreen)}>
                                 <Text style={styles.textButton}>PHONE ACCOUNT</Text>
                             </TouchableOpacity>
                         </View>
@@ -54,7 +54,6 @@ class Test1 extends React.Component<Props, State> {
     }
 }
 const mapState = (state: AppState) => ({
-    number: state.appState.number,
 });
 
 const mapDispatch = ({ appState }: RematchDispatch<models>) => ({

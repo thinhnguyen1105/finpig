@@ -10,12 +10,17 @@ import { LinearGradient } from 'expo';
 import BasicLayout from '../../components/BasicLayout';
 import { getLayout } from '../../helpers/get-layout';
 import AppText from '../../components/AppText';
-import { Button, Icon } from 'native-base'
+import { Button, Icon, Spinner } from 'native-base'
 import { BudgetData } from '../../store/models/budget-info/interface';
+import { Membership } from '../../store/models/membership/interface';
+import config from '../../config';
 
 export interface Props extends NavigationScreenProps {
     budgetData: BudgetData;
     getMembershipAsync: () => void;
+    purchaseMembershipAsync: (type: string) => void;
+    spendingCards: Membership[];
+    isBusy: boolean;
 }
 export interface State {
 
@@ -25,6 +30,7 @@ export interface CardTypeColor {
     [id: string]: {
         startColor: string;
         endColor: string;
+        name: string;
     }
 }
 
@@ -36,24 +42,21 @@ export interface DataCard {
     type: string;
 }
 
-export interface SpedingCard {
-    name: string;
-    expiryDate: string;
-    type: string;
-}
-
 const cardTypeColor: CardTypeColor = {
     gold: {
         startColor: '#fca912',
-        endColor: '#f5f125'
+        endColor: '#f5f125',
+        name: 'Gold Card'
     },
     silver: {
         startColor: '#5b5b5b',
-        endColor: '#e3e3e3'
+        endColor: '#e3e3e3',
+        name: 'Silver Card'
     },
     diamond: {
         startColor: '#0c76f0',
-        endColor: '#80ade3'
+        endColor: '#80ade3',
+        name: 'Diamond Card'
     }
 }
 
@@ -68,6 +71,9 @@ class Test1 extends React.Component<Props, State> {
         this.props.getMembershipAsync();
     }
     renderDataCard = ({ item }: { item: DataCard }) => {
+        const onPress = () => {
+            this.props.purchaseMembershipAsync(item.type);
+        }
         return (
             <View style={{ marginHorizontal: 12, borderTopEndRadius: 5, borderTopStartRadius: 5 }}>
                 <LinearGradient
@@ -94,7 +100,9 @@ class Test1 extends React.Component<Props, State> {
 
 
                 </LinearGradient>
-                <Button full style={{ backgroundColor: '#00a651', borderBottomLeftRadius: 5, borderBottomRightRadius: 5 }}>
+                <Button full
+                    onPress={onPress}
+                    style={{ backgroundColor: '#00a651', borderBottomLeftRadius: 5, borderBottomRightRadius: 5 }}>
                     <AppText style={{ color: '#fff', right: -8 }}>Buy now</AppText>
                     <Icon name="cart" style={{ fontSize: 24 }}></Icon>
                 </Button>
@@ -104,20 +112,21 @@ class Test1 extends React.Component<Props, State> {
         )
     }
 
-    renderSpendingCard = ({ item }: { item: SpedingCard }) => {
+    renderSpendingCard = ({ item }: { item: Membership }) => {
+        console.log('asd')
         return (
             <LinearGradient
-                colors={[cardTypeColor[item.type].startColor, cardTypeColor[item.type].endColor]}
+                colors={[cardTypeColor[item.cardType].startColor, cardTypeColor[item.cardType].endColor]}
                 start={[0.1, 0.1]}
                 style={{ width: '100%', height: 60, justifyContent: 'center', alignItems: 'center', borderRadius: 5, marginVertical: 6 }}>
                 <View style={{ flexDirection: 'row', alignItems: 'flex-start' }}>
                     <Image source={require('../../../assets/spending_card_screen/pink_pig.png')}
                         style={{ height: 35, width: 35, alignSelf: 'center' }} resizeMode="contain" />
                     <View style={{ paddingHorizontal: 8 }}>
-                        <AppText style={{ color: '#fff', fontFamily: 'iciel-bold' }}>{item.name}</AppText>
+                        <AppText style={{ color: '#fff', fontFamily: 'iciel-bold' }}>{cardTypeColor[item.cardType].name}</AppText>
                         <View style={{ flexDirection: 'row' }}>
                             <AppText style={{ color: '#fff', fontFamily: 'iciel-bold' }}>Expiry Date: </AppText>
-                            <AppText style={{ color: '#fff', paddingTop: 4 }}>{item.expiryDate}</AppText>
+                            <AppText style={{ color: '#fff', paddingTop: 4 }}>{item.purchaseDate}</AppText>
                         </View>
                     </View>
                 </View>
@@ -126,6 +135,7 @@ class Test1 extends React.Component<Props, State> {
     }
 
     render(): React.ReactNode {
+        console.log('spendingCards', this.props.spendingCards);
         const dataCard: DataCard[] = [{
             name: 'Silver Card',
             totalValue: '5 millions',
@@ -148,22 +158,13 @@ class Test1 extends React.Component<Props, State> {
             validPeriod: '30 days',
             type: 'diamond'
         }]
-        const dataSpedingCard: SpedingCard[] = [{
-            name: 'Silver Card',
-            type: 'silver',
-            expiryDate: '11/05/2016'
-        },
-        {
-            name: 'Gold Card',
-            expiryDate: '11/05/2016',
-            type: 'gold'
-        },
-        {
-            name: 'Diamond Card',
-            expiryDate: '11/05/2016',
-            type: 'diamond'
-        }]
+        if (this.props.isBusy) {
+            return (<View style={{ backgroundColor: '#fff', alignItems: 'center', justifyContent: 'center', flex: 1 }}>
+                <Spinner color={config().primaryColor} />
 
+            </View>)
+
+        }
         return (
             <BasicLayout image title="Spending Card">
                 <View style={styles.container}>
@@ -177,7 +178,7 @@ class Test1 extends React.Component<Props, State> {
                     <View style={{ marginHorizontal: '10%', backgroundColor: '#fff', marginVertical: 15, paddingVertical: 6, borderRadius: 5 }}>
                         <AppText style={{ fontFamily: 'iciel-bold', alignSelf: 'center', paddingVertical: 12 }}>Your Speding Card</AppText>
                         <FlatList
-                            data={dataSpedingCard}
+                            data={this.props.spendingCards}
                             renderItem={this.renderSpendingCard}
                             keyExtractor={(item, index) => index.toString()}
                             style={{ paddingHorizontal: '10%', }} />
@@ -188,11 +189,14 @@ class Test1 extends React.Component<Props, State> {
     }
 }
 const mapState = (state: AppState) => ({
+    isBusy: state.appState.isBusy,
+    spendingCards: state.membership.memberships,
     budgetData: state.budgetData.data,
 });
 
 const mapDispatch = ({ membership }: RematchDispatch<models>) => ({
-    getMembershipAsync: () => { membership.getMembershipAsync('' as any) }
+    getMembershipAsync: () => { membership.getMembershipAsync('' as any) },
+    purchaseMembershipAsync: (type: string) => { membership.purchaseMembershipAsync(type as any) }
 });
 
 export default connect(mapState, mapDispatch as any)(Test1);

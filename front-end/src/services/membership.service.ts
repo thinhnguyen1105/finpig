@@ -21,4 +21,25 @@ export default class AuthService {
             });
     }
 
+    purchaseMemberShip(type: string, token: string): Promise<any> {
+        return fetch(`${url}/`, {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                'x-access-token': token
+            },
+            body: JSON.stringify({
+                cardType: type
+            })
+        })
+            .then((response) => response.json())
+            .then((responseJson) => {
+                return responseJson;
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
+
 }

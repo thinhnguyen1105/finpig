@@ -33,7 +33,6 @@ export default createModel({
                 const groups = []
                 for (const groupId of groupIds) {
                     const group = await serviceProvider.GroupService().getGroup(rootState.userProfile.token, groupId);
-                    console.log('login', group);
                 }
             } catch (error) {
                 console.log(error)
@@ -45,7 +44,6 @@ export default createModel({
             try {
                 this.updateBusyState(true);
                 const creatGroup = await serviceProvider.GroupService().createGroup(payload, rootState.userProfile.token);
-                console.log('creatGroup', creatGroup);
             } catch (error) {
                 console.log(error)
             } finally {

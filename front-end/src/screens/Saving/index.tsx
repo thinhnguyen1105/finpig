@@ -1,5 +1,5 @@
 import React from 'react';
-import { Animated, View, Text, Image, ScrollView, TouchableOpacity, Modal, TextInput } from 'react-native';
+import { Animated, View, Text, Image, ScrollView, TouchableOpacity, Modal, TextInput, TouchableHighlight } from 'react-native';
 import { NavigationScreenProps } from 'react-navigation';
 import { connect } from 'react-redux';
 import { RematchDispatch } from '@rematch/core';
@@ -183,7 +183,7 @@ class Test1 extends React.Component<Props, State> {
                     transparent={true}
                     visible={this.state.isVisibleTopup}
                 >
-                    <TouchableOpacity
+                    <TouchableHighlight
                         style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingHorizontal: '10%', backgroundColor: 'rgba(0,0,0,0.5)' }}
                         onPress={() => this.setState({ isVisibleTopup: false })}>
                         <View style={{ backgroundColor: '#fff', paddingVertical: 30, paddingHorizontal: 35, borderRadius: 10, alignItems: 'center', justifyContent: 'center', }}>
@@ -195,7 +195,7 @@ class Test1 extends React.Component<Props, State> {
                                 <AppText style={{ color: '#fff' }}>Withdraw</AppText>
                             </Button>
                         </View>
-                    </TouchableOpacity>
+                    </TouchableHighlight>
 
                 </Modal>
                 <Modal
@@ -204,13 +204,13 @@ class Test1 extends React.Component<Props, State> {
                     visible={this.state.isVisibleWithdraw}
                     onShow={() => setTimeout(() => this.setState({ isVisibleWithdraw: false }), 2000)}
                 >
-                    <TouchableOpacity
+                    <TouchableHighlight
                         style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingHorizontal: '10%', backgroundColor: 'rgba(0,0,0,0.5)' }}
                         onPress={() => this.setState({ isVisibleWithdraw: false })}>
                         <View style={{ backgroundColor: config().primaryColor, paddingVertical: 30, paddingHorizontal: 35, borderRadius: 10, alignItems: 'center', justifyContent: 'center', }}>
                             <AppText style={{ fontFamily: 'iciel-bold', fontSize: 20, textAlign: 'center', color: '#fff' }}>You have successfully withdrawed the saving to balance account</AppText>
                         </View>
-                    </TouchableOpacity>
+                    </TouchableHighlight>
 
                 </Modal>
             </BasicLayout>

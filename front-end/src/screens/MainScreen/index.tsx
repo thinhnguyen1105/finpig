@@ -35,7 +35,7 @@ class Test1 extends React.Component<Props, State> {
         };
     }
     componentDidMount() {
-        // this.props.getBudgetAsync()
+        this.props.getBudgetAsync()
     }
 
 

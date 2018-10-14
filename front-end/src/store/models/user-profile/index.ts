@@ -77,7 +77,6 @@ export default createModel({
                     this.getUseGroupAsync({ token: login.data.token, userId: login.data.userId });
                     this.updateToken(login.data.token);
                     serviceProvider.NavigatorService().navigate(ScreenNames.Choose)
-                    console.log('login', login);
                 }
 
             } catch (error) {

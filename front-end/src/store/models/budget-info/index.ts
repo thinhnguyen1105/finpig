@@ -38,7 +38,6 @@ export default createModel({
         this.updateBusyState(true);
 
         const budget = await serviceProvider.BudgetServices().getBudget(rootState.userProfile.token, rootState.userProfile.info.budget);
-        console.log('butget', budget);
         this.updateBudget(budget.data)
       } catch (error) {
         console.log(error)

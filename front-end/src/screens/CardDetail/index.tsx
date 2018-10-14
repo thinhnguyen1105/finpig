@@ -30,12 +30,6 @@ class CardDetail extends React.Component<Props, State> {
       opacity: new Animated.Value(1),
     };
   }
-  // componentDidMount() {
-  //     this.props.getBudgetAsync({ token: this.state.username, budgetId: this.state.password })
-  // }
-
-
-
   render(): React.ReactNode {
     const { userProfile } = this.props;
     return (

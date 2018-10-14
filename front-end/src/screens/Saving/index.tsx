@@ -1,5 +1,5 @@
 import React from 'react';
-import { Animated, View, Text, Image, ScrollView, TouchableOpacity } from 'react-native';
+import { Animated, View, Text, Image, ScrollView, TouchableOpacity, Modal, TextInput } from 'react-native';
 import { NavigationScreenProps } from 'react-navigation';
 import { connect } from 'react-redux';
 import { RematchDispatch } from '@rematch/core';
@@ -11,6 +11,8 @@ import Carousel from 'react-native-snap-carousel';
 import BasicLayout from '../../components/BasicLayout';
 import { getLayout } from '../../helpers/get-layout';
 import { BudgetData } from '../../store/models/budget-info/interface';
+import config from '../../config';
+import { Button } from 'native-base';
 
 export interface Props extends NavigationScreenProps {
     budgetData: BudgetData
@@ -169,6 +171,24 @@ class Test1 extends React.Component<Props, State> {
 
                     </View>
                 </ScrollView>
+                <Modal
+                    animationType="slide"
+                    transparent={true}
+                    visible={true}
+                >
+                    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingHorizontal: '10%', backgroundColor: 'rgba(0,0,0,0.5)' }}>
+                        <View style={{ backgroundColor: config().primaryColor, paddingVertical: 30, paddingHorizontal: 35, borderRadius: 10 }}>
+                            <AppText style={{ color: '#fff' }}>Amount</AppText>
+                            <TextInput
+                                style={{ paddingVertical: 12, borderBottomColor: '#fff', borderBottomWidth: 1, color: '#fff', width: 100 }}
+                            />
+                            <Button full style={{ marginVertical: 12, borderRadius: 5 }}>
+                                <AppText style={{ color: '#fff' }}>Withdraw</AppText>
+                            </Button>
+                        </View>
+                    </View>
+
+                </Modal>
             </BasicLayout>
         );
     }

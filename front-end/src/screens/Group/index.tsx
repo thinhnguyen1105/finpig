@@ -104,40 +104,6 @@ class Test1 extends React.Component<Props, State> {
                         showsVerticalScrollIndicator={false}
                     />
                 </View>
-                <Modal
-                    animationType="slide"
-                    transparent={true}
-                    visible={true}
-                    onShow={() => setTimeout(() => {
-                        this.setState({ winner: '' })
-                        this.props.navigation.navigate(ScreenNames.ChoosePig)
-                    }, 2000)}
-                >
-                    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingHorizontal: '10%', backgroundColor: 'rgba(0,0,0,0.5)' }}>
-                        <View style={{ backgroundColor: config().primaryColor, paddingVertical: 30, paddingHorizontal: 35, borderRadius: 10, }}>
-                            <Item regular style={{ width: '100%' }}>
-                                <Input placeholder='Regular Textbox' />
-                            </Item>
-                            <Item regular style={{ width: '100%' }}>
-                                <Input placeholder='Regular Textbox' />
-                            </Item>
-                            <Item regular style={{ width: '100%' }}>
-                                <Input placeholder='Regular Textbox' />
-                            </Item>
-                            <Item regular style={{ width: '100%' }}>
-                                <Input placeholder='Regular Textbox' />
-                            </Item>
-                            <Item regular style={{ width: '100%' }}>
-                                <Input placeholder='Regular Textbox' />
-                            </Item>
-                            <Item regular style={{ width: '100%' }}>
-                                <Input placeholder='Regular Textbox' />
-                            </Item>
-                        </View>
-                    </View>
-
-                </Modal>
-
             </BasicLayout>
         );
     }

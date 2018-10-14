@@ -37,10 +37,10 @@ class Test1 extends React.Component<Props, State> {
 
     render(): React.ReactNode {
         return (
-            <BasicLayout >
+            <BasicLayout image >
                 <View style={styles.container}>
-                    <Text style={{ fontFamily: 'iciel-bold', fontSize: 28, color: config().primaryColor }}>PIG RACING</Text>
-                    <Text style={{ fontFamily: 'iciel-regular', fontSize: 14, color: config().primaryColor, textAlign: 'center', paddingHorizontal: '15%' }}>
+                    <Text style={{ fontFamily: 'iciel-bold', fontSize: 28, color:'#fff' }}>PIG RACING</Text>
+                    <Text style={{ fontFamily: 'iciel-regular', fontSize: 14, color:'#fff', textAlign: 'center', paddingHorizontal: '15%' }}>
                         You need to choose a pig that you believe it can win
                     </Text>
                     <View style={{ width: '100%', paddingHorizontal: '5%', flexWrap: 'wrap', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingVertical: '15%' }}>

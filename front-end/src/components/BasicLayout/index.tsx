@@ -41,7 +41,10 @@ class BasicLayout extends React.Component<IProps, IState> {
                         <Right>
                             {this.props.add &&
                                 <TouchableOpacity style={{ paddingRight: 12 }} onPress={this.props.onPressAdd}>
-                                    <Icon name="add" style={{ fontSize: 30, color: '#fff', fontWeight: 'bold' }} />
+                                    <Image
+                                        source={require('../../../assets/Register/button_plus.png')}
+                                        style={{ width: 20, height: 20 }}
+                                        resizeMode="contain" />
                                 </TouchableOpacity>}
                         </Right>
 

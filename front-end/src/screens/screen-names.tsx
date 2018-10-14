@@ -10,7 +10,8 @@ const ScreenNames = {
    Saving: 'Saving',
    Group: 'Group',
    GroupDetail: 'GroupDetail',
-   Spending: 'Spending'
+   Spending: 'Spending',
+   CardDetail: 'CardDetail',
 };
 
 export default ScreenNames;

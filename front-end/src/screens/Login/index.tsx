@@ -34,7 +34,7 @@ class Test1 extends React.Component<Props, State> {
     }
 
     login = () => {
-        this.props.loginAsync({username: this.state.username, password: this.state.password})
+        this.props.loginAsync({ username: this.state.username, password: this.state.password })
     }
 
     render(): React.ReactNode {
@@ -90,7 +90,7 @@ class Test1 extends React.Component<Props, State> {
     }
 }
 const mapState = (state: AppState) => ({
-    number: state.appState.number,
+    number: state.appState.number, 
 });
 
 const mapDispatch = ({ userProfile }: RematchDispatch<models>) => ({

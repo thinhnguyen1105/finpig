@@ -22,7 +22,7 @@ class AppNavigator extends React.Component<any, any> {
 			[ScreenNames.Spending]: { screen: Spending },
 		},
 		{
-			initialRouteName: ScreenNames.Login,
+			initialRouteName: ScreenNames.MainScreen,
 			headerMode: 'none'
 		}
 	);

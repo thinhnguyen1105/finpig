@@ -122,7 +122,7 @@ const mapState = (state: AppState) => ({
 });
 
 const mapDispatch = ({ budgetData }: RematchDispatch<models>) => ({
-    getBudgetAsync: (param: GetBudgetParam) => { budgetData.getBudgetAsync(param) }
+    getBudgetAsync: (param: GetBudgetParam) => { budgetData.getBudgetAsync(param as any) }
 });
 
 export default connect(mapState, mapDispatch as any)(Test1);

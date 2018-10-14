@@ -86,7 +86,7 @@ async function purchase(req, res, plan) {
             user.purchasedMemberShip = purchasedMemberShip;
 
             user = await user.save();
-            return sendSuccess(res, true);
+            return sendSuccess(res, true, memberShip);
         } catch (err) {
             return sendFailure(res);
         }

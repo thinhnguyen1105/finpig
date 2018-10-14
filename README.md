@@ -232,6 +232,13 @@ API:
 	----> {
 		status
 		auth
+		data: {
+			total: Number,
+			saving: Number,
+			purchaseDate: Date,
+			cardType: String,
+	timeLimit: Days
+		}
 	}
 
 	//get infor purchused memberShip with memberShipId

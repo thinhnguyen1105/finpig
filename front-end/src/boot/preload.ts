@@ -1,4 +1,5 @@
 import { Font, Asset } from 'expo';
+import files from '../helpers/files';
 
 const preloadFontsAsync = async () => {
     await Font.loadAsync({
@@ -7,9 +8,22 @@ const preloadFontsAsync = async () => {
     });
 };
 
+const preloadImagesAsync = async () => {
+    const images = [
+        files.BackgroundPink,
+    ];
+
+    const cacheImages = images.map((image) => {
+        return Asset.fromModule(image).downloadAsync();
+    });
+
+    await Promise.all(cacheImages);
+};
+
 const preloadAssetsAsync = async () => {
     await Promise.all([
         preloadFontsAsync(),
+        preloadImagesAsync()
     ]);
 };
 

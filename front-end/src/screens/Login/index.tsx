@@ -3,7 +3,7 @@ import { Animated, View, Text, Image, TouchableOpacity } from 'react-native';
 import { NavigationScreenProps } from 'react-navigation';
 import { connect } from 'react-redux';
 import { RematchDispatch } from '@rematch/core';
-import { models } from '../../store';
+import { models, dispatch } from '../../store';
 import { AppState } from '../../store/state';
 import { getLayout } from '../../helpers/get-layout';
 import styles from './styles';
@@ -11,21 +11,30 @@ import { Item, Input, Icon, Button } from 'native-base';
 import BasicLayout from '../../components/BasicLayout';
 import AppText from '../../components/AppText';
 import ScreenNames from '../screen-names';
+import serviceProvider from '../../services/service.provider';
+import { LoginParam } from '../../services/interface.service';
 
 export interface Props extends NavigationScreenProps {
     number: number;
     updateNumber: () => void;
+    loginAsync: (param: LoginParam) => void;
 }
 export interface State {
-
+    username: string;
+    password: string;
 }
 
 class Test1 extends React.Component<Props, State> {
     constructor(props: any) {
         super(props);
         this.state = {
-            opacity: new Animated.Value(1),
+            username: '',
+            password: ''
         };
+    }
+
+    login = () => {
+        this.props.loginAsync({username: this.state.username, password: this.state.password})
     }
 
     render(): React.ReactNode {
@@ -44,24 +53,24 @@ class Test1 extends React.Component<Props, State> {
                         <View style={{ paddingHorizontal: 8 }}>
                             <Icon active name='home' />
                         </View>
-                        <Input placeholder='Email' style={styles.textInput} />
+                        <Input placeholder='Username' style={styles.textInput} onChangeText={(username) => this.setState({ username })} />
                     </Item>
                     <Item regular style={styles.textInputContainer}>
                         <View style={{ paddingHorizontal: 8 }}>
                             <Icon active name='home' />
                         </View>
-                        <Input placeholder='Password' style={styles.textInput} secureTextEntry />
+                        <Input placeholder='Password' style={styles.textInput} secureTextEntry onChangeText={(password) => this.setState({ password })} />
                     </Item>
                     <View style={{ marginTop: 20, width: '100%' }}>
                         <Button full style={{ backgroundColor: '#00caab', borderRadius: 5, }}
-                            onPress={() => this.props.navigation.navigate(ScreenNames.Choose)}>
+                            onPress={this.login}>
                             <AppText>SIGN IN</AppText>
                         </Button>
                     </View>
 
                     <View style={{ flexDirection: 'row', paddingTop: 10, alignContent: 'center', justifyContent: 'center' }}>
                         <TouchableOpacity style={{ borderRightWidth: 1, borderRightColor: '#000', paddingHorizontal: 4 }}
-                         onPress={() => this.props.navigation.navigate(ScreenNames.Register)}>
+                            onPress={() => this.props.navigation.navigate(ScreenNames.Register)}>
                             <AppText style={styles.text}>SIGN UP</AppText>
 
                         </TouchableOpacity>
@@ -84,7 +93,8 @@ const mapState = (state: AppState) => ({
     number: state.appState.number,
 });
 
-const mapDispatch = ({ appState }: RematchDispatch<models>) => ({
+const mapDispatch = ({ userProfile }: RematchDispatch<models>) => ({
+    loginAsync: (param: LoginParam) => { userProfile.loginAsync(param) }
 });
 
 export default connect(mapState, mapDispatch as any)(Test1);

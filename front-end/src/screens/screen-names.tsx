@@ -9,7 +9,8 @@ const ScreenNames = {
    Race: 'Race',
    Saving: 'Saving',
    Group: 'Group',
-   GroupDetail: 'GroupDetail'
+   GroupDetail: 'GroupDetail',
+   Spending: 'Spending'
 };
 
 export default ScreenNames;

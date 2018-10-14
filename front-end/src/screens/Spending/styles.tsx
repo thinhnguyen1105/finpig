@@ -1,10 +1,11 @@
-import { ViewStyle, ImageStyle } from "react-native";
+import { ViewStyle, TextStyle, ImageStyle } from "react-native";
+import { View } from 'native-base';
 
 const container: ViewStyle = {
-    paddingTop: 15,
-    paddingHorizontal: '10%',
-    alignItems: 'center',
+    // paddingHorizontal: '10%',
+    // alignItems: 'center',
     // justifyContent: 'center',
+    paddingTop: 20
 }
 
 const button: ImageStyle = {

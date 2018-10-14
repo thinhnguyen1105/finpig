@@ -8,6 +8,7 @@ import Race from './Game/Race';
 import Saving from './Saving';
 import Group from './Group';
 import GroupDetail from './GroupDetail';
+import Spending from './Spending';
 
 export {
     Choose,
@@ -19,5 +20,6 @@ export {
     Race,
     Saving,
     Group,
-    GroupDetail
+    GroupDetail,
+    Spending
 };

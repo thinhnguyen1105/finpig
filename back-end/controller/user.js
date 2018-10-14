@@ -88,8 +88,31 @@ function getGroup(req, res) {
     });
 }
 
+async function getMemberShip(req, res) {
+    verifyJwt(req, res, async (userId) => {
+        if (req.params.userId !== userId) {
+            return sendFailure(res, false);
+        }
+        try {
+            let user = await User.findById(userId, {
+                password: 0,
+                bankingCard: 0
+            });  
+
+            return sendSuccess(res, true, {
+                memberShips: user.purchasedMemberShip
+            });
+        } catch (err) {
+            if (err) {
+                sendFailure(res);
+            }
+        }
+    })
+}
+
 module.exports = {
     getUser,
     putUser,
-    getGroup
+    getGroup,
+    getMemberShip
 };

@@ -5,4 +5,5 @@ module.exports = {
     BankingCardSchema: require('./bankingCard'),
     TransactionSchema: require('./transaction'),
     TotalExchangeSchema: require('./totalExchange'),
+    MemberShipSchema: require('./memberShip'),
 }

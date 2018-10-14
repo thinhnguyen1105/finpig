@@ -48,6 +48,7 @@ API:
 				budget: BUDGET_ID
 
 				transactions: Array(TRANSACTION_ID) // transaction of user
+				purchasedMemberShip: Array(MEMBER_SHIP_ID)
 			}
 		}
 
@@ -56,6 +57,14 @@ API:
 		auth: [true/false]
 		data: {
 			groups: Array(GROUP_ID)
+		}
+	}
+
+	/{userId}/member_ships GET -> {
+		status: [success, failure],
+		auth: [true/false]
+		data: {
+			memberShips: Array(MEMBER_SHIP_ID)
 		}
 	}
 
@@ -172,25 +181,41 @@ API:
 		}
 	}
 
-/member_ship/{memberShip} POST {}
-	----> {
-		status
-		auth
-		data: {
-			budget: {
-				saving,
-				balance,
-				expense,
-				ownerType,
-				ownerId
-			}
-			plan: {
-				total,
-				saving,
-				timeLimit (day)
+/member_ship
+	/ GET
+		-> {
+			status,
+			auth,
+			data: {
+				silver: {
+					total: Number,
+					saving: Number,
+					purchaseDate: Date,
+					cardType: String,
+					timeLimit: Days
+				},
+				gold: ...
+				diamond: ...
 			}
 		}
-	}
+
+	/{memberShipId} GET -> {
+			status,
+			auth,
+			data: {
+				total: Number,
+				saving: Number,
+				purchaseDate: Date,
+				cardType: String,
+				timeLimit: Days
+			}
+		}
+
+	/{memberShip} POST {}
+		----> {
+			status
+			auth
+		}
 
 DATABASE:
 User {
@@ -205,6 +230,16 @@ User {
 	groups: Array(GROUP_ID)
 	budget: BUDGET_ID
 	bankingCard: CARD_ID
+
+	purchasedMemberShip: Array(MEMBER_SHIP_ID)
+}
+
+MemberShip: {
+	total: Number,
+	saving: Number,
+	purchaseDate: Date,
+	cardType: String,
+	timeLimit: Days
 }
 
 BankingCard: {

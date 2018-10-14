@@ -37,8 +37,6 @@ class Test1 extends React.Component<Props, State> {
 
 
     render(): React.ReactNode {
-        const { budgetData } = this.props;
-        console.log(budgetData);
         const { userProfile } = this.props;
         return (
             <BasicLayout image noHeader>

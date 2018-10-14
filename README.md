@@ -177,11 +177,18 @@ API:
 		status
 		auth
 		data: {
-			saving,
-			balance,
-			expense,
-			ownerType,
-			ownerId
+			budget: {
+				saving,
+				balance,
+				expense,
+				ownerType,
+				ownerId
+			}
+			plan: {
+				total,
+				saving,
+				timeLimit (day)
+			}
 		}
 	}
 

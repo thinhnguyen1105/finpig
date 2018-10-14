@@ -54,7 +54,10 @@ async function purchase(req, res, plan) {
             budget.expense += plan.total;
             budget.saving += plan.saving;
             budget = await budget.save();
-            return sendSuccess(res, true, budget);
+            return sendSuccess(res, true, {
+                budget: budget,
+                plan: plan
+            });
         } catch (err) {
             return sendFailure(res);
         }

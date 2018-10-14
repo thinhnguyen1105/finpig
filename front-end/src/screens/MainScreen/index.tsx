@@ -32,7 +32,7 @@ class Test1 extends React.Component<Props, State> {
         };
     }
     componentDidMount() {
-        this.props.getBudgetAsync()
+        // this.props.getBudgetAsync()
     }
 
 
@@ -103,14 +103,14 @@ class Test1 extends React.Component<Props, State> {
 
                     <View style={{ position: 'absolute', bottom: 90, }}>
                         <Image
-                            source={require('../../../assets/main_screen/pig.png')}
+                            source={require('../../../assets/lon.gif')}
                             style={{ height: 170, width: 100, }}
                             resizeMode="contain" />
-                        <View style={{ bottom: -15 }}>
+                        <View style={{ bottom: 0 }}>
                             <View style={{ backgroundColor: '#19fa73', height: 5, width: `${this.props.userProfile.info.exp}%`, zIndex: 2, position: 'absolute' }}></View>
                             <View style={{ backgroundColor: 'green', height: 5, width: '100%', zIndex: -1, top: 0, position: 'absolute' }}></View>
                         </View>
-                        <Text style={{ bottom: -25, alignSelf: 'center' }}>Level: {Math.round(userProfile.info.exp / 100)}</Text>
+                        <Text style={{ bottom: -10, alignSelf: 'center' }}>Level: {Math.round(userProfile.info.exp / 100)}</Text>
                     </View>
 
                 </View>

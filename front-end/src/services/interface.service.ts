@@ -29,7 +29,6 @@ export interface CreateGroupParams {
     goal: number;
     startDate: Date;
     endDate: Date;
-    userIds: string[];
 }
 
 export interface CreateBankParams {

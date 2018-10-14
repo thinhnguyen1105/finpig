@@ -20,6 +20,11 @@ export default createModel({
   state: defaultState, // initial state
   reducers: {
     // handle state changes with pure functions
+    updateBusyState: (payload: any) => {
+      return {
+        ...payload
+      };
+    },
     updateBudget: (state: BudgetState, payload: BudgetData) => {
       return {
         ...state,
@@ -30,11 +35,15 @@ export default createModel({
   effects: (_dispatch) => ({
     async getBudgetAsync(payload: string, rootState: AppState): Promise<any> {
       try {
+        this.updateBusyState(true);
+
         const budget = await serviceProvider.BudgetServices().getBudget(rootState.userProfile.token, rootState.userProfile.info.budget);
         console.log('butget', budget);
         this.updateBudget(budget.data)
       } catch (error) {
         console.log(error)
+      } finally {
+        this.updateBusyState(false);
       }
     },
   })

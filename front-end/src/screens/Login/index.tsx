@@ -7,14 +7,16 @@ import { models, dispatch } from '../../store';
 import { AppState } from '../../store/state';
 import { getLayout } from '../../helpers/get-layout';
 import styles from './styles';
-import { Item, Input, Icon, Button } from 'native-base';
+import { Item, Input, Icon, Button, Spinner } from 'native-base';
 import BasicLayout from '../../components/BasicLayout';
 import AppText from '../../components/AppText';
 import ScreenNames from '../screen-names';
 import serviceProvider from '../../services/service.provider';
 import { LoginParam } from '../../services/interface.service';
+import config from '../../config';
 
 export interface Props extends NavigationScreenProps {
+    isBusy: boolean;
     number: number;
     updateNumber: () => void;
     loginAsync: (param: LoginParam) => void;
@@ -38,6 +40,13 @@ class Test1 extends React.Component<Props, State> {
     }
 
     render(): React.ReactNode {
+        if (this.props.isBusy) {
+            return (<View style={{ backgroundColor: '#fff', alignItems: 'center', justifyContent: 'center', flex: 1 }}>
+                <Spinner color={config().primaryColor} />
+
+            </View>)
+
+        }
         return (
             <BasicLayout noHeader >
                 <View style={styles.container}>
@@ -90,7 +99,7 @@ class Test1 extends React.Component<Props, State> {
     }
 }
 const mapState = (state: AppState) => ({
-    number: state.appState.number, 
+    isBusy: state.appState.isBusy,
 });
 
 const mapDispatch = ({ userProfile }: RematchDispatch<models>) => ({

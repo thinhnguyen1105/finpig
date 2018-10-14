@@ -1,18 +1,23 @@
 
 import { createModel } from '@rematch/core';
-import { GroupState, Group } from './interface';
+import { MembershipState } from './interface';
 import { AppState } from '../../state';
 import serviceProvider from '../../../services/service.provider';
 
-const defaultState: GroupState = {
-    groups: []
+const defaultState: MembershipState = {
+    memberships: []
 };
 
 export default createModel({
     state: defaultState, // initial state
     reducers: {
         // handle state changes with pure functions
-        updateGroup: (state: GroupState, payload: GroupState) => {
+        updateBusyState: (payload: any) => {
+            return {
+                ...payload
+            };
+        },
+        updateMembership: (state: MembershipState, payload: MembershipState) => {
             return {
                 ...state,
                 ...payload
@@ -20,16 +25,20 @@ export default createModel({
         },
     },
     effects: (_dispatch) => ({
-        async getGroupAsync(payload: string, rootState: AppState): Promise<any> {
+        async getMembershipAsync(payload: string, rootState: AppState): Promise<any> {
             try {
-                const groupIds = rootState.userProfile.info.groups;
-                const groups = []
-                for (const groupId of groupIds) {
-                    const group = await serviceProvider.GroupService().getGroup(rootState.userProfile.token, groupId);
-                    console.log('login', group);
+                this.updateBusyState(true);
+
+                const membershipIds = rootState.userProfile.info.purchasedMemberShip;
+                const memberships = []
+                for (const membershipId of membershipIds) {
+                    const membership = await serviceProvider.GroupService().getGroup(rootState.userProfile.token, membershipId);
+                    console.log('membership', membership);
                 }
             } catch (error) {
                 console.log(error)
+            } finally {
+                this.updateBusyState(false);
             }
         },
     })

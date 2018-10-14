@@ -12,13 +12,16 @@ import ScreenNames from '../screen-names';
 import BasicLayout from '../../components/BasicLayout';
 import { UserState } from '../../store/models/user-profile/interface';
 import { BudgetState, BudgetData } from '../../store/models/budget-info/interface';
+import { Spinner } from 'native-base';
+import config from '../../config';
 
 export interface Props extends NavigationScreenProps {
     number: number;
     updateNumber: () => void;
     userProfile: UserState;
     getBudgetAsync: () => void;
-    budgetData: BudgetData
+    budgetData: BudgetData;
+    isBusy: boolean
 }
 export interface State {
 
@@ -40,6 +43,13 @@ class Test1 extends React.Component<Props, State> {
     render(): React.ReactNode {
         const { userProfile, budgetData } = this.props;
         console.log(budgetData);
+        if (this.props.isBusy) {
+            return (<View style={{ backgroundColor: '#fff', alignItems: 'center', justifyContent: 'center', flex: 1 }}>
+                <Spinner color={config().primaryColor} />
+
+            </View>)
+
+        }
         return (
             <BasicLayout image noHeader>
                 <View style={styles.container}>
@@ -121,6 +131,7 @@ class Test1 extends React.Component<Props, State> {
 const mapState = (state: AppState) => ({
     budgetData: state.budgetData.data,
     userProfile: state.userProfile,
+    isBusy: state.appState.isBusy
 });
 
 const mapDispatch = ({ budgetData }: RematchDispatch<models>) => ({

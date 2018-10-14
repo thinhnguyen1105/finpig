@@ -5,19 +5,16 @@ import { connect } from 'react-redux';
 import { RematchDispatch } from '@rematch/core';
 import { models } from '../../store';
 import { AppState } from '../../store/state';
-import styles from './styles';
 import AppText from '../../components/AppText';
-import Carousel from 'react-native-snap-carousel';
 import BasicLayout from '../../components/BasicLayout';
-import { getLayout } from '../../helpers/get-layout';
 import ScreenNames from '../screen-names';
+import { Spinner } from 'native-base';
 import config from '../../config';
-import { Item, Input } from 'native-base';
-
 export interface Props extends NavigationScreenProps {
     number: number;
     updateNumber: () => void;
     getGroupAsync: () => void;
+    isBusy: boolean;
 }
 export interface State {
 
@@ -91,6 +88,13 @@ class Test1 extends React.Component<Props, State> {
             descriptrion: 'Lorem ipsum',
             goals: '$100'
         }]
+        if (this.props.isBusy) {
+            return (<View style={{ backgroundColor: '#fff', alignItems: 'center', justifyContent: 'center', flex: 1 }}>
+                <Spinner color={config().primaryColor} />
+
+            </View>)
+
+        }
         return (
             <BasicLayout image title="Group" add>
                 <View style={{
@@ -109,7 +113,7 @@ class Test1 extends React.Component<Props, State> {
     }
 }
 const mapState = (state: AppState) => ({
-    number: state.appState.number,
+    isBusy: state.appState.isBusy,
 });
 
 const mapDispatch = ({ group }: RematchDispatch<models>) => ({

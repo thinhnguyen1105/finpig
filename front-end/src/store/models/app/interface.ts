@@ -1,3 +1,3 @@
 export interface UiAppState {
-    number: number;
+    isBusy: boolean;
 }

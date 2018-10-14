@@ -1,12 +1,11 @@
-export interface GroupState {
-    groups: Group[]
+export interface MembershipState {
+    memberships: Membership[]
 }
 
-export interface Group {
-    _id: string;
-    name: string;
-    description: string;
-    goal: number;
-    user: string[];
-    budget: string
+export interface Membership {
+    total: number,
+    saving: number,
+    purchaseDate: string,
+    cardType: string,
+    timeLimit: number
 }

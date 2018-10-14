@@ -13,6 +13,7 @@ import { getLayout } from '../../helpers/get-layout';
 import { BudgetData } from '../../store/models/budget-info/interface';
 import config from '../../config';
 import { Button } from 'native-base';
+import ScreenNames from '../screen-names';
 
 export interface Props extends NavigationScreenProps {
     budgetData: BudgetData
@@ -111,7 +112,9 @@ class Test1 extends React.Component<Props, State> {
                             </View>
                         </View>
                         <View style={{ flexDirection: 'row', paddingHorizontal: '5%' }}>
-                            <TouchableOpacity style={{ backgroundColor: '#fff', padding: 20, alignItems: 'center', justifyContent: 'center', marginHorizontal: 10 }}>
+                            <TouchableOpacity
+                                onPress={() => this.props.navigation.navigate(ScreenNames.AddGroup)}
+                                style={{ backgroundColor: '#fff', padding: 20, alignItems: 'center', justifyContent: 'center', marginHorizontal: 10 }}>
                                 <Image
                                     source={require('../../../assets/my_saving_screen/wallet.png')}
                                     style={{ height: 40, width: 40 }}

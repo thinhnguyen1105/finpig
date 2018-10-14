@@ -15,6 +15,7 @@ import { BudgetData } from '../../store/models/budget-info/interface';
 
 export interface Props extends NavigationScreenProps {
     budgetData: BudgetData;
+    getMembershipAsync: () => void;
 }
 export interface State {
 
@@ -61,6 +62,10 @@ class Test1 extends React.Component<Props, State> {
         super(props);
         this.state = {
         };
+    }
+
+    componentDidMount(): void {
+        this.props.getMembershipAsync();
     }
     renderDataCard = ({ item }: { item: DataCard }) => {
         return (
@@ -186,7 +191,8 @@ const mapState = (state: AppState) => ({
     budgetData: state.budgetData.data,
 });
 
-const mapDispatch = ({ appState }: RematchDispatch<models>) => ({
+const mapDispatch = ({ membership }: RematchDispatch<models>) => ({
+    getMembershipAsync: () => { membership.getMembershipAsync('' as any) }
 });
 
 export default connect(mapState, mapDispatch as any)(Test1);

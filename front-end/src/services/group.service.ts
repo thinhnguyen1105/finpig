@@ -22,12 +22,19 @@ export default class AuthService {
     }
     createGroup(params: CreateGroupParams, token: string): Promise<any> {
         return fetch(`${url}`, {
-            method: 'GET',
+            method: 'POST',
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
                 'x-access-token': token
             },
+            body: JSON.stringify({
+                name: params.name,
+                description: params.description,
+                goal: params.goal,
+                startDate: params.startDate,
+                endDate: params.endDate
+            }),
         })
             .then((response) => response.json())
             .then((responseJson) => {

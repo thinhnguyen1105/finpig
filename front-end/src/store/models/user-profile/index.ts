@@ -19,7 +19,8 @@ const defaultState: UserState = {
         age: 0,
         budget: '',
         __v: 0,
-        email: ''
+        email: '',
+        purchasedMemberShip: []
     },
     token: '',
 };
@@ -28,6 +29,11 @@ export default createModel({
     state: defaultState, // initial state
     reducers: {
         // handle state changes with pure functions
+        updateBusyState: (payload: any) => {
+            return {
+                ...payload
+            };
+        },
         updateUser: (state: UserState, payload: UserInfo) => {
             return {
                 ...state,
@@ -53,6 +59,8 @@ export default createModel({
     effects: (_dispatch) => ({
         async loginAsync(payload: LoginParam, _rootState: AppState): Promise<any> {
             try {
+                this.updateBusyState(true);
+
                 const login = await serviceProvider.AuthService().login({ username: payload.username, password: payload.password });
 
                 if (login.status === 'failure') {
@@ -74,24 +82,33 @@ export default createModel({
 
             } catch (error) {
                 console.log(error)
+            } finally {
+                this.updateBusyState(false);
             }
         },
         async getUserAsync(payload: GetUserParam, _rootState: AppState): Promise<any> {
             try {
+                this.updateBusyState(true);
+
                 const user = await serviceProvider.UserService().getUser(payload.token, payload.userId);
                 console.log(user);
                 this.updateUser(user.data);
             } catch (error) {
                 console.log(error)
+            } finally {
+                this.updateBusyState(false);
             }
         },
         async getUseGroupAsync(payload: GetUserParam, _rootState: AppState): Promise<any> {
             try {
+                this.updateBusyState(true);
                 const userGroup = await serviceProvider.UserService().getUserGroup(payload.token, payload.userId);
                 console.log(userGroup);
                 this.updateUserGroup(userGroup.data);
             } catch (error) {
                 console.log(error)
+            } finally {
+                this.updateBusyState(false);
             }
         },
     })

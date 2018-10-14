@@ -14,5 +14,6 @@ export interface UserInfo {
     age: number;
     budget: string;
     __v: number;
-    email: string
+    email: string;
+    purchasedMemberShip: string[]
 }

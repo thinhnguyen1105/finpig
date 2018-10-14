@@ -11,19 +11,13 @@ import AppText from '../../components/AppText';
 import ScreenNames from '../screen-names';
 import BasicLayout from '../../components/BasicLayout';
 import { UserState } from '../../store/models/user-profile/interface';
-<<<<<<< HEAD
 import { GetBudgetParam } from '../../services/interface.service';
-=======
->>>>>>> 71e2bf4a63e808e19a2a69c199f939aa3e7b0370
 
 export interface Props extends NavigationScreenProps {
     number: number;
     updateNumber: () => void;
     userProfile: UserState;
-<<<<<<< HEAD
     getBudgetAsync: (param: GetBudgetParam) => void;
-=======
->>>>>>> 71e2bf4a63e808e19a2a69c199f939aa3e7b0370
 }
 export interface State {
 
